@@ -1,0 +1,28 @@
+// Place all the styles related to the mainpage controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@mixin border-radius($radius,$border,$color) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+    border:$border solid $color
+}
+
+body {
+	font-size:0px;
+}
+
+a {
+	display: inline-block;
+	opacity: 0.6;
+	transition: opacity 0.45s;
+}
+a:hover{
+	opacity: 1;
+}
+
+a img {
+	display:block;	
+}
