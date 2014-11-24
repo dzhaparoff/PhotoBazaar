@@ -10,7 +10,7 @@
     border:$border solid $color
 }
 
-body {
+body > div{
 	font-size:0px;
 }
 
@@ -25,4 +25,16 @@ a:hover{
 
 a img {
 	display:block;	
+    width:140px;
+    height:140px;
+}
+
+p {
+	font-size:12px
+}
+
+.debug_dump{
+	padding:10px;
+	background-color:#333;
+	color:#afafaf
 }

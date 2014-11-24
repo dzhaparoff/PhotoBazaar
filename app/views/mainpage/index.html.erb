@@ -1,1 +1,8 @@
-<% @photos.each do |photo|%><a href="<%= photo['ex_link'] %>" target="_blank"><img src="<%= photo['image_url'] %>"></a><% end %>
+<h1>500px</h1>
+<div class="fh">
+<% @photos.each do |photo|%><a href="<%= photo['local_file'] %>" title="Текущий рейтинг: <%= photo['rating'] %>, наивысший: <%= photo['highest_rating'] %>" target="_blank"><img src="<%= photo['image_url'] %>"></a><% end %>
+</div>
+<h1>Flickr</h1>
+<div class="flickr">
+<% @fphotos.each do |photo|%><a href="<%= photo['local_file'] %>" title="Фото: <%= photo['id'] %>" target="_blank"><img src="<%= photo['thumb'] %>"></a><% end %>
+</div>
