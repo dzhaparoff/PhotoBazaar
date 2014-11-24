@@ -40,7 +40,7 @@ class MainpageController < ApplicationController
             'thumb'=> sizes[1]['source']
             }
           
-         single_p_hash['local_file'] = '/images/fh_'+single_p_hash['id'].to_s+'.jpg';
+         single_p_hash['local_file'] = '/images/fl_'+single_p_hash['id'].to_s+'.jpg';
 			
           photo_exist = File.exist?('public'+single_p_hash['local_file'])
 			if !photo_exist
