@@ -1,0 +1,4 @@
+<h1>Flickr</h1>
+<div class="flickr">
+<% @fphotos.each do |photo|%><a href="<%= photo['local_file'] %>" title="Фото: <%= photo['id'] %>" target="_blank"><img src="<%= photo['thumb'] %>"></a><% end %>
+</div>

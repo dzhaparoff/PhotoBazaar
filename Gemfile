@@ -40,4 +40,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem "flickr.rb"
 gem "awesome_print"
 gem "better_errors"
-gem "miro"
+gem "miro" #работа с изображениями
+gem "color"
+gem "color_namer"
