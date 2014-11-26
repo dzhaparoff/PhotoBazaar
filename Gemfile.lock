@@ -146,6 +146,7 @@ DEPENDENCIES
   awesome_print
   better_errors
   coffee-rails (~> 4.0.0)
+  color
   color_namer
   f00px
   flickr.rb

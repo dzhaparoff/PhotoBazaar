@@ -1,4 +1,4 @@
 <h1>500px</h1>
 <div class="fh">
-<% @photos.each do |photo|%><a href="<%= photo['local_file'] %>" title="Текущий рейтинг: <%= photo['rating'] %>, наивысший: <%= photo['highest_rating'] %>" target="_blank"><img src="<%= photo['image_url'] %>"><span style="background:<%=photo['colors'][0][:hex]%>"><%=photo['base_color_name']%></span></a><% end %>
+<% @photos.each do |photo|%><a href="<%= photo['local_file'] %>" title="Текущий рейтинг: <%= photo['rating'] %>, наивысший: <%= photo['highest_rating'] %>" target="_blank"><img src="<%= photo['image_url'] %>"><span style="background:<%=photo['colors'][0][:hexOriginal]%>"><%=photo['base_color_name']%></span></a><% end %>
 </div>

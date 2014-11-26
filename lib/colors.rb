@@ -19,7 +19,7 @@ class ColorChecker
         color = []
          colors.to_hex.each do |c|
              colorName = ColorNamer.name_from_html_hash( c )
-             color << {hex: '#'+colorName[0], colorName: colorName[1].to_sym, colorShade: colorName[2].to_sym}           
+             color << {hexOriginal: c, hex: '#'+colorName[0], colorName: colorName[1].to_sym, colorShade: colorName[2].to_sym}           
          end         
         return color
      else
