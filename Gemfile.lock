@@ -145,6 +145,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   better_errors
+  cocaine
   coffee-rails (~> 4.0.0)
   color
   color_namer

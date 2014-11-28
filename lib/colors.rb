@@ -8,6 +8,8 @@ class ColorChecker
      else 
          Miro.options[:color_count] = 5 
      end
+     	Miro.options[:resolution] = '150x150'
+     	Miro.options[:method] = 'histogram'
    end
 
   attr_accessor :file, :color_count
