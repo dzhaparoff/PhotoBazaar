@@ -1,0 +1,30 @@
+<li data-photo-item-in-list class="photo" id="Photo_<%=photo.id%>" data-page="<%= @page %>" base-color="<%= photo.base_color%>" data-bp-number="<%= @last_bp_number %>">
+	<a href="/photo/<%= photo.id %>" data-photo-id="<%=photo.id%>">
+	<div class="image_overflow"><img src="<%= photo.thumbnails.url(:big) %>" class="ui fluid image"></div>
+	<div class="ui dimmer">
+	  <div class="content">
+	    <div class="top">
+	     	<div class="meta">
+		      <span class="time" created-at="<%= photo.created_at %>"></span>
+		      <span class="views">Просмотров: <%= photo.times_viewed %></span>
+		    </div>
+	    </div>
+	  </div>
+	  <div class="content">
+	    <div class="bottom">
+	    	<div class="meta">
+	    		<span class="detail"><i class="expand icon"></i></span>
+	    		<span class="author" data-position="bottom right">by <%= photo.photographer.fullname %></span>
+	    	</div>
+	    </div>
+	  </div>
+	 	<div class="ui inverted flowing popup" id="photoAuthorPopup_<%= photo.id %>">
+			<img class="ui avatar image" src="<%= photo.photographer.userpic %>">
+			<div class="content">
+			    <div class="header"><%= photo.photographer.fullname %></div>
+		    	<div class="description"><%= photo.photographer.country %> <%= photo.photographer.city %></div>
+	    	</div>
+		</div>
+	</div>
+	</a>
+</li>

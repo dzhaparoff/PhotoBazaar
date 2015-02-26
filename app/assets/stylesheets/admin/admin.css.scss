@@ -1,0 +1,153 @@
+$black_background_color: #101010;
+
+#admin .vertical.segment {
+	padding: 12rem 0rem;
+}
+#admin .fixed.launch.button {
+  position: fixed;
+  top: 20px;
+  left: -1px;
+  z-index: 50; 
+  white-space: nowrap;
+  overflow: hidden;  
+  transition:
+	0.3s width ease,
+	0.5s transform ease;
+  background-color: $black_background_color;
+  opacity: 1;
+  width:60px;
+  height:auto;
+}
+#admin .fixed.launch.button:hover {
+  opacity: 1;
+}
+#admin .ui.inverted.menu {
+  background-color: $black_background_color;
+}
+#admin .top.fixed {
+  height:30px
+}
+#admin .item.no_pre:before {
+  display: none
+}
+#admin .menu .logo {
+  width: 50px;
+  height: 50px;
+  margin: 20px auto; 
+}
+#admin .item.logo_placeholder:hover {
+ background: $black_background_color
+}
+#admin .menu .logo path {
+  stroke:#fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit:10;
+  transition: 0.5s stroke ease;
+}
+#admin .menu .item:hover .logo path {
+   stroke:#fa515e;
+}
+
+#admin .menu .hidden.divider {
+  margin: 0px;
+  height: 20px;
+  background: #151515;
+}
+
+#admin .menu .item.current {
+background-color:#f7f7f7;
+color:$black_background_color;
+}
+#admin .menu .item.current .icon {
+color:$black_background_color;
+}
+
+#admin .ui.selection.dropdown {
+  min-width: 100%!important;
+}
+.centeraligned.image {
+  display: block;
+  margin: 0px auto;
+  height:50px;
+  font-size:50px;
+  color:#000;
+  border: 0px;
+}
+.hidden_input {
+  display: none
+}
+
+#CategoryTable td {
+  position: relative;
+}
+
+#CategoryTable td .contenteditable {
+  margin: -0.7em -0.8em;
+  padding:  0.7em 0.8em;
+}
+#CategoryTable td .contenteditable:focus {
+  background:#fff;
+  outline: none;
+  position: relative;
+  z-index: 999;
+}
+#CategoryTable td .contenteditable.large:focus {
+  position: absolute;
+  width:120%;
+  min-height:180%;
+  height:auto;
+  top:-20%;
+  left:-10%;
+  z-index: 999;
+  background:#fff;
+  box-shadow: 0px 0px 10px rgba(20,20,20,0.65);
+  outline: none;
+  color:#101010
+}
+
+#admin .found_image {
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+#admin .colors {
+  height:10px;
+}
+
+#admin .colors .row {
+  padding:0px;
+}
+
+#admin .colors .color {
+  height:10px;
+}
+
+#admin photo {
+  position: relative;
+}
+
+#admin photo.exist:after {
+  content: " ";
+  background: #fff;
+  position: absolute;
+  display: block;
+  top: -2%;
+  left: -2%;
+  width: 104%;
+  height: 104%;
+  opacity: 0.9;
+  z-index:1;
+  visibility: visible;
+}
+
+.statistics.dashboard {
+  width:100%;
+}
+
+.statistics.dashboard .statistic {
+  width: 25%;
+  max-width: 25%;
+}

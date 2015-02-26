@@ -1,0 +1,23 @@
+ <div class="ui vertical segment">
+      <div class="ui stackable page grid">
+      		<div class="row">
+      			<div class="column">
+	            <h1 class="center aligned ui header">
+	              Фотографии
+	            </h1>
+	          </div>
+      		</div>
+			<div class="row">
+
+	              <div class="ui three column grid">
+	              <% @photos.each do |photo| %><div class="column" id="Photo_<%=photo.id%>">
+					      <a href="/photo/<%= photo.id %>" class="fancybox" rel="Photos"><img src="<%= photo.thumbnails.url(:big) %>" class="ui fluid image"></a>
+					  </div><% end %>
+	              </div>
+
+        	</div>
+        	<div class="row">
+        		<div class="center aligned column"><%= will_paginate @photos %></div>
+        	</div>
+      </div>
+</div>

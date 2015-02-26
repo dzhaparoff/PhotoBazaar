@@ -1,0 +1,10 @@
+<div data-ng-controller="photosController" class="ui vertical main basic segment" id="Main">
+      <div class="ui stackable page grid">
+  			<div class="row">
+          <ul id="Photos" infinite-pagination-photos-list total="<%= @total %>" per-page="<%= @per_page %>" last-photo-of-the-day="<%= @best_photo_of_day_number %>" class="grid photos_grid"><%= render @photos %></ul>
+        </div>
+      </div>
+      <div photos-paginator class="paginator">
+        <div class="center aligned column"><%= will_paginate @photos%></div>
+      </div>
+</div>

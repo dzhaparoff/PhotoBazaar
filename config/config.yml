@@ -1,0 +1,11 @@
+defaults: &defaults
+  fresh_interval: 3
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

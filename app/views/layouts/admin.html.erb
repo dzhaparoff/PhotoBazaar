@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html ng-app="mpxAdmin">
+<head>
+  <title>PhotoBazaar | Administration</title>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'admin/admin.css', media: 'all', 'data-turbolinks-track' => true  %>
+  <%= stylesheet_link_tag params[:controller], media: 'all', 'data-turbolinks-track' => true  %>
+  <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin/admin.js', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag params[:controller], 'data-turbolinks-track' => true %>
+  <%= yield :stylesheets %>
+</head>
+<body id="admin" ng-controller="MainController">
+<div class="ui sidebar left vertical inverted labeled icon menu">
+  <a href="/" class="item logo_placeholder">
+    <i class="ui icon logo image">      
+      
+                <svg version="1.2" baseProfile="tiny" id="logo_svg"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="50px" height="50px"
+                      xml:space="preserve" viewbox="0 0 120 85">
+                    <path d="M10.709,17.361h96.502
+                            c1.631,0,2.954,1.323,2.954,2.954v61.052c0,1.632-1.323,2.954-2.954,2.954H10.709c-1.632,0-2.954-1.323-2.954-2.954V20.315
+                            C7.755,18.683,9.077,17.361,10.709,17.361z"/>
+                    <path d="M45.174,17.361l9.847-16.74h27.572l9.847,16.74"/>
+                    <path d="M68.315,22.284
+                            c15.5,0,28.064,12.565,28.064,28.064S83.814,78.413,68.315,78.413S40.25,65.848,40.25,50.349S52.815,22.284,68.315,22.284z"/>
+                    <path d="M68.315,31.147
+                            c10.605,0,19.202,8.597,19.202,19.202c0,10.605-8.597,19.202-19.202,19.202c-10.605,0-19.202-8.597-19.202-19.202
+                            C49.113,39.744,57.71,31.147,68.315,31.147z"/>
+                    <path d="M30.403,17.361v66.961"/>
+                    <path d="M30.403,39.025h12.228"/>
+                    <path d="M93.997,39.025h16.168"/>
+                    <path d="M99.333,23.269c2.719,0,4.924,2.204,4.924,4.924
+                            s-2.204,4.924-4.924,4.924s-4.924-2.204-4.924-4.924S96.614,23.269,99.333,23.269z"/>
+                    <path d="M110.165,30.162h4.924
+                            c1.088,0,1.969,0.882,1.969,1.969v9.847c0,1.088-0.882,1.969-1.969,1.969h-4.924"/>
+                    <path d="M7.755,43.948H2.831
+                            c-1.088,0-1.969-0.882-1.969-1.969v-9.847c0-1.088,0.882-1.969,1.969-1.969h4.924"/>
+                    <path d="M17.602,17.361v-5.908h18.71v5.908"/>
+                </svg>
+    </i>
+    Главная
+  </a>
+    <div class="ui divider hidden"></div>
+  <a class="item<%=cp(admin_root_path)%>" href="/admin/">
+    <i class="dashboard icon"></i>
+    Dashboard
+  </a>
+  <div class="ui divider hidden"></div>
+  <a class="item no_pre<%=cp(admin_photos_import_path)%>" href="/admin/photos_import/">
+    <i class="plus square outline icon"></i>
+    Импорт
+  </a>
+  <a class="item no_pre<%=cp(admin_photos_path)%>" href="/admin/photos/">
+    <i class="camera retro icon"></i>
+    Фотографии
+  </a>
+  <a class="item no_pre<%=cp(admin_photographers_path)%>" href="/admin/photographers/">
+    <i class="flickr icon"></i>
+    Фотографы
+  </a>
+  <a class="item" href="/admin/categories/">
+    <i class="folder icon"></i>
+    Категории
+  </a>
+  <a class="item">
+    <i class="tags icon"></i>
+    Теги
+  </a>
+  <!--<div class="ui horizontal divider section inverted">
+    Actions
+  </div>-->
+  <div class="ui divider hidden"></div>
+  <a class="item no_pre">
+    <i class="setting icon"></i>
+    Настройки
+  </a>
+  <a class="item" href="<%= destroy_user_session_path %>" data-method="delete">
+    <i class="sign out icon"></i>
+    Выход
+  </a>
+</div>
+<div class="pusher"> 
+  <div class="ui black massive launch right attached fixed button">
+      <i class="content icon"></i>  
+  </div>
+<%= content_for?(:content) ? yield(:content) : yield %>
+</div>
+</body>
+</html>

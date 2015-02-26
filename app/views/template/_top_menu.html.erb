@@ -1,0 +1,22 @@
+<div class="header-wrap" main-header>
+    <header class="header">
+        <div class="ui page grid">
+        	<div class="wrapper">
+                <span class="header__toggle sidebar-toggle">
+                    <span data-svg-icon data-icon-name="hamburger" width="35" height="35" class="icon" data-ng-click="sidebar_toggle()"></span>
+                    <span class="name">Photo<span>Bazaar</span></span>
+                </span>
+                <div class="header__center"></div>
+                <form data-small-search-form class="header__toggle ui transparent input icon search_form" action="/photos/" method="get">
+			        <input type="text" id="SearchInput" name="search" placeholder="Поиск по сайту" value="<%= params[:search] %>" autocomplete="off">
+			        <i class="search link icon"></i>
+		        </form>
+           </div>
+        </div>
+    </header>
+    <div class="header_bg_wrapper">
+	    <div class="header_bg">
+	    	<div class="header_bg_cloak"></div>
+	    </div>
+    </div>
+</div>

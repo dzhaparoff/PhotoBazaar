@@ -1,0 +1,3 @@
+<%= content_for?(:stylesheets) ? yield(:stylesheets) : yield %>
+<%= content_for?(:ajax_page_load_content) ? yield(:ajax_page_load_content) : yield %>
+<page-meta-data page-title="<%= content_for?(:title) ? yield(:title) : 'PhotoBazaar' %>"></page-meta-data>

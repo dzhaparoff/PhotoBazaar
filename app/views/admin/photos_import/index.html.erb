@@ -1,0 +1,101 @@
+  <div class="ui vertical segment">
+      <div class="ui very relaxed stackable page grid">
+        <div class="row">
+          <div class="column">
+            <h1 class="center aligned ui header">
+              Поиск и добавление фотографий
+            </h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="eight wide column">           
+            <div class="ui form" ng-controller="PhotosFhFormController">
+            <iframe src="/images/icons/500px.svg" height="50" alt="" class="ui image centeraligned"></iframe>
+            <div class="ui section divider hidden"></div>   
+            <p>Поиск фотографии по фразе осуществляется API функцией <a href="https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos_search.md">"photos/search"</a></p>             
+              <%= form_tag do %>
+                <div class="two fields">
+                  <div class="field">
+                    <%= label_tag(:photos_search_term, "Фраза, ключевые слова:") %>
+                    <%= text_field(:photos_search, :term, {'class'=>'text_input form-control', 'ng-model' => 'formData.term'}) %>
+                  </div>
+                  <div class="field">
+                    <label>Категория</label>
+                    <div class="Model CategoryModel ui selection dropdown">
+                      <input type="hidden" class="formData category">
+                      <input type="text" class="hidden_input" ng-model="formData.category">
+                      <div class="default text">Любая</div>
+                      <i class="dropdown icon"></i>
+                      <div class="menu">
+                        <div class="item" data-value="0">Любая</div>
+                        <div class="item" ng-repeat="category in categories" data-value="{{category.name}}">{{category.name}}</div>
+                      </div>
+                                  <div class="ui inverted dimmer">
+                                    <div class="ui small loader"></div>
+                                  </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="two fields">
+                  <div class="field">
+                    <label for="formDataSort">Сортировать по:</label>
+                    <select
+                      id="formDataSort"
+                      ng-model="formData.sort"
+                      ng-init="formData.sort = 'rating'"  
+                      ng-options="sort.value as sort.name for sort in formSort">
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="formDataRpp">Количество:</label>
+                    <select
+                      id="formDataRpp"
+                      ng-model="formData.rpp"
+                      ng-init="formData.rpp = 5"  
+                      ng-options="rpp.value as rpp.name for rpp in formRpp">
+                    </select>
+                  </div>
+                </div>
+                <div class="ui section divider header horizontal">все готово?</div>   
+                <button type="button" ng-click='processForm($event)' class="ui submit button animated fluid basic blue" ng-class="loading">
+                    <div class="visible content">Загрузить</div>
+                    <div class="hidden content"><i class="right arrow icon"></i></div>
+                </button>
+              <% end %>
+            </div>
+          </div>
+          <div class="eight wide column">
+              <div class="ui form">
+                  <i class="flickr icon ui image centeraligned"></i>
+                  <div class="ui section divider hidden"></div>   
+                  <p>Поиск фотографии по фразе осуществляется API функцией <a href="#">"photos_search"</a></p>
+              </div>
+          </div>         
+        </div>
+
+        <div class="ui section divider hidden horizontal"></div>
+        <!-- Найденые фотографии -->
+        <div class="row" bindonce ng-controller="PhotosSearchResult" ng-show="photosFound">
+              <div class="ui five cards">
+               <photo class="card found_photo" id="Photo_{{photo.id}}" ng-repeat="photo in fh_photos" ng-class="{'exist' : photoExist[photo.id]}" photo-id="{{photo.id}}">                   
+                  <div class="image dimmable">
+                      <div class="ui dimmer">
+                        <div class="content">
+                          <div class="center">
+                            <a bo-href="photo.image_url" rel="gallery" class="ui inverted button fbox">Посмотреть</a>
+                          </div>
+                        </div>
+                      </div>
+                      <img bo-src="photo.image_url" alt="" width="100%">            
+                   </div>
+                   <div class="ui bottom attached button" ng-click="addPhoto(photo)">
+                    <i class="add icon"></i>
+                    Добавить
+                  </div>
+              </photo>
+              </div>
+        </div>        
+        <!--end Найденые фотографии -->
+        
+      </div>
+    </div>

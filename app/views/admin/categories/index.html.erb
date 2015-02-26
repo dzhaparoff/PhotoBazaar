@@ -1,0 +1,66 @@
+  <div class="ui vertical segment">
+      <div class="ui very relaxed stackable page grid">
+        <div class="row">
+          <div class="column">
+              <h1 class="center aligned ui header">
+                 Категории фотографий
+              </h1>
+            </div>
+        </div>
+        <div class="row">          
+          <div class="sixteen wide column"> 
+            <form action="" class="Model CategoryModel" ng-controller="CategoryTable">
+              <table class="ui basic table celled" id="CategoryTable">
+                <thead>
+                  <tr>
+                    <th class="center aligned">ID</th>
+                    <th>Название</th>
+                    <th>Название l18n</th>
+                    <th>Код</th>
+                    <th class="six wide">Описание</th>
+                    <th class="center aligned one wide">Фотографий</th>
+                    <th class="center aligned one wide">Сортировка</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="category in categories | orderBy: 'sort'" ng-click="active(category,'active','watch')" ng-class="category_row_class[category.id]">
+                    <td class="collapsing center aligned">{{category.id}}</td>
+                    <td contenteditable="{{category.editable === true ? true : false}}" ng-model="category.name">{{category.name}}</td>
+                    <td contenteditable="{{category.editable === true ? true : false}}" ng-model="category.name_l18n">{{category.name_l18n}}</td>
+                    <td contenteditable="{{category.editable === true ? true : false}}" ng-model="category.code">{{category.code}}</td>
+                    <td><div class="contenteditable large" contenteditable="{{category.editable === true ? true : false}}" strip-br="true" ng-model="category.description" select-non-editable="true">{{category.description}}</div></td>
+                    <td class="center aligned">{{category.photos_count}}</td>
+                    <td class="center aligned" contenteditable="{{category.editable === true ? true : false}}" ng-model="category.sort">{{category.sort}}</td>
+                  </tr>                
+                </tbody>
+                <tfoot class="full-width">
+                  <tr>                    
+                    <th colspan="7">
+                      <button type="button" class="ui right floated labeled green small icon button" ng-show="buttonsShowEdit" ng-click="edit(category)">
+                        <i class="edit icon"></i> Изменить
+                      </button>
+                      <button type="button" class="ui right floated labeled green small icon button" ng-show="buttonsShowApply" ng-click="save(category)">
+                        <i class="checkmark icon"></i> Сохранить
+                      </button>
+                      <button type="button" class="ui right floated labeled red small icon button" ng-show="buttonsShowApply" ng-click="cancel(category)">
+                        <i class="remove icon"></i> Отменить
+                      </button>
+                      <button type="button" class="ui right floated labeled red small icon button" ng-show="buttonsShowApply" ng-click="remove(category)">
+                        <i class="minus icon"></i> Удалить
+                      </button>
+                      <button type="button" ng-click="new()" class="ui small primary labeled icon button" ng-class="{disabled : buttonsShowApply}">
+                        <i class="plus icon"></i> Добавить категорию
+                      </button>                      
+                    </th>
+                  </tr>
+                </tfoot>
+              </table>
+                                  <div class="ui dimmer inverted">
+                                    <div class="ui small loader"></div>
+                                  </div>                              
+              </form>
+          </div>
+        </div>
+
+      </div>
+    </div>

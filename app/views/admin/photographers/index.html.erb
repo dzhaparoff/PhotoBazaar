@@ -1,0 +1,38 @@
+ <div class="ui vertical segment">
+      <div class="ui very relaxed stackable page grid">
+      		<div class="row">
+      			<div class="column">
+	            <h1 class="center aligned ui header">
+	              Фотографы
+	            </h1>
+	          </div>
+      		</div>
+			<div class="row" ng-controller="PhotographersPage">
+
+				<div class="ui grid list">
+
+				   <% @photographers.each do |photographer| %><div class="four wide column item" id="Photographer_<%=photographer.id%>">
+				    <img class="ui avatar image" src="<%= photographer.userpic %>">
+				    <div class="content">
+				      <a class="header"><%= photographer.fullname%></a>
+				    </div>
+				    <div class="ui padded grid">
+				    <div class="three column row">
+				       		<% photographer.photos[0..2].each do |photo|%><div class="column"><a href="<%=photo.thumbnails.url%>" class="fancybox" rel="User_<%=photographer.id %>"><img src="<%=photo.thumbnails.url(:thumb) %>" class="ui fluid image"/></a></div><% end %>
+				     </div>
+				     </div>
+				  </div><% end %>
+
+				 </div>
+
+        	</div>
+        	<div class="row">
+        		<div class="column center aligned"><%= will_paginate @photographers %></div>
+        	</div>
+      </div>
+</div>
+
+
+
+
+

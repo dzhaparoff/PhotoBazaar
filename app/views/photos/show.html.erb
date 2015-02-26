@@ -1,0 +1,22 @@
+<% title @photo.name + " - PhotoBazaar.ru - Лучшие фотографии со всего мира каждый день" %>
+
+<% content_for :stylesheets do %> 
+<style type="text/css">
+  
+</style>
+<% end %>
+
+<% content_for :content do %>
+<%#= render "template/sidebar" %>
+<div class="pusher photo_detail" data-phb-content>
+  <%#= render "template/top_menu" %>
+  <%= render "photo_detail" %>
+  <%#= render "template/footer" %>
+</div>
+<% end %>
+
+<% content_for :ajax_page_load_content do %>
+<div class="partial photo_detail">
+  <%= render "photo_detail" %>
+</div>
+<% end %>

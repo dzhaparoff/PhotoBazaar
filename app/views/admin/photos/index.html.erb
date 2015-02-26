@@ -1,0 +1,22 @@
+ <div class="ui vertical segment">
+      <div class="ui very relaxed stackable page grid">
+      		<div class="row">
+      			<div class="column">
+	            <h1 class="center aligned ui header">
+	              Фотографии
+	            </h1>
+	          </div>
+      		</div>
+			<div class="row" ng-controller="PhotosPage">
+	              <div class="ui five column grid">
+	              <% @photos.each do |photo| %><div class="column" id="Photo_<%=photo.id%>" ng-hide="hidden_prods[<%=photo.id%>]">
+					      <a href="<%= photo.local_image_url %>" class="fancybox" rel="Photos"><img src="<%= photo.thumbnails.url(:medium) %>" class="ui fluid image"></a>
+					      <a href="#" ng-click="remove_photo('<%=photo.id%>')">Удалить</a>
+					  </div><% end %>
+	              </div>
+        	</div>
+        	<div class="row">
+        		<div class="center aligned column"><%= will_paginate @photos %></div>
+        	</div>
+      </div>
+</div>

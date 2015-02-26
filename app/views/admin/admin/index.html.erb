@@ -1,0 +1,49 @@
+<div class="ui vertical segment" ng-controller="Dashboard">
+	<div class="ui very relaxed stackable page grid">
+		<div class="row">
+			<%==  current_user.email%>
+		</div>
+		<div class="row">
+			<div class="ui statistics dashboard">
+					
+						<div class="ui statistic">
+						  <div class="value">
+							<i class="folder icon"></i> <%=@count[:categories]%>
+						  </div>
+						  <div class="label">
+							Категорий
+						  </div>
+						</div>
+					
+						<div class="ui statistic">
+						  <div class="value">
+							<i class="male icon"></i> <%=@count[:photographers]%>
+						  </div>
+						  <div class="label">
+							Фотографов
+						  </div>
+						</div>
+					
+						<div class="ui statistic">
+						  <div class="value">
+							<i class="camera retro icon"></i> <%=@count[:photos]%>
+						  </div>
+						  <div class="label">
+							Фотографий
+						  </div>
+						</div>
+					
+						<div class="ui statistic">
+						  <div class="value">
+							<i class="photo icon"></i> <%=@count[:cameras]%>
+						  </div>
+						  <div class="label">
+							Камер
+						  </div>
+						</div>
+					
+
+			</div>
+        </div>
+	</div>
+</div>
