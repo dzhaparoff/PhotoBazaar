@@ -47,7 +47,7 @@ class ImagesController < ApplicationController
 	response_hash = JSON.parse(response.body)
 	photos = response_hash['photos']
 	
-		photos.each { |photo|
+		photos.each do |photo|
 			photo['ex_link'] = photo['image_url'].gsub(/\/{1}([a-zA-Z0-9_-]*).jpg/,'/2048.jpg')		
 			photo['local_file'] = '/images/fh_'+photo['id'].to_s+'.jpg';			
 			photo['exist'] = File.exist?('public'+photo['local_file'])   
@@ -62,14 +62,21 @@ class ImagesController < ApplicationController
             photo['colors'] = colors.check    
             photo['base_color_name'] = photo['colors'][0][:colorName]
         
-		}
+		end
 
 	@photos = photos
     return @photos
   end
     
     def index
-        @photos = get_top_fh
-        @fphotos = get_top_fl        
+      # @photos = get_top_fh
+      # @fphotos = get_top_fl        
+
+    response = F00px.get('photos/search',{'term' => 'sexy girl', 'sort'=>'rating' , 'rpp'=>"10" })	
+	response_hash = JSON.parse(response.body)
+	photos = response_hash['photos']
+
+	@photos = photos
+
     end
 end

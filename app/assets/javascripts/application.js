@@ -12,5 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require modernizr.min.js
+//= require masonry.min.js
+//= require semantic.js
+//= require lodash.js
+//= require velocity.js
+//= require momentjs/moment.js
+//= require angular
+//= require angular-ngProgress.js
+//= require angular-uiRouter.js
+//= require fancybox.js
+//= require snapsvg.min.js
+//= require plugins.js
+//= require ng-app/manifest.js

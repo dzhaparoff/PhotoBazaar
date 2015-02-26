@@ -1,50 +1,144 @@
 // Place all the styles related to the mainpage controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-@mixin border-radius($radius,$border,$color) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
-    border:$border solid $color
+.siteHeader {
+	height: 100%;
+	text-align: center;
+	width: 100%;
+	position: relative;
+	color:#fff;
+	overflow: hidden;
 }
 
-body > div{
-	font-size:0px;
+.siteHeader-inner {
+	display: block;
+	vertical-align: bottom;
+	position: absolute;
+	z-index: 2;
+	bottom:3.5rem;
+	width:100%;
+	left:0px;
 }
 
-a {
-	display: inline-block;	
-    position:relative
+.siteHeader-inner .item {
+	opacity: 0.6;
+	transition: opacity 0.5s;
 }
 
-a img {
-	display:block;	
-    width:140px;
-    height:140px;
+.siteHeader-inner .item:hover {
+	opacity: 1;
 }
 
-p {
-	font-size:12px
+.siteHeader .siteHeader-name {
+	font-size: 1.2em;
+	text-transform: uppercase;
+	font-family: "helveticaneuecyrlight";
+	opacity: 0.4;
+	position: absolute;
+	z-index: 3;
+	right:3.5rem;
+	bottom:3.5rem;
+	transition: opacity 0.5s;
 }
 
-.debug_dump{
-	padding:10px;
-	background-color:#333;
-	color:#afafaf
+.siteHeader .siteHeader-name:hover {
+	opacity: 1;
 }
 
-a span {
-    position:absolute;
-    top:0px;
-    left:0px;
-    display:block;
-    width:100%;
-    height:100%;
-    opacity: 0.6;
-	transition: opacity 0.45s;
+.siteHeader-inner .ui.avatar.image{
+	height: 5em;
+	width: 5em;
+	border: 4px solid rgba(255,255,255,0.75);
 }
-a:hover span  {
-    opacity: 0;
+
+.siteHeader-inner .ui.list > .item > .content {
+	text-align: left;
+	line-height: 1.2em;
+	font-size: 0.9em;
+}
+
+.siteHeader-inner .ui.list > .item > .content .header{
+	font-family: "helveticaneuecyrlight";
+	padding-bottom: 10px;
+	font-size: 1.3em;
+}
+
+.siteHeader-inner .ui.list > .item > .content .header span{
+	text-transform: uppercase;
+}
+
+.siteHeader .logobox {
+	position: absolute;
+	top:30%;
+	left:0px;
+	width: 100%;
+	text-align: center;
+	z-index: 3;
+	font-family: "helveticaneuecyrlight";
+	font-size: 1.2em;
+}
+
+.siteHeader .logobox .title {
+	font-size: 60px;
+	margin:10px 0 5px;
+}
+.siteHeader .logobox .title span {
+	font-size: 20px;
+	position: relative;
+	top:-20px;
+	left:5px;
+}
+.siteHeader .bg_image {
+	display: block;
+	position: absolute;
+	top:-5%;
+	left:-5%;
+	width:110%;
+	height:110%;
+	transform:translate3d(0,0,0);
+}
+
+#logo_svg path {
+	stroke:#fff;
+	stroke-width: 3;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	stroke-miterlimit:10;
+	fill: none;
+	display: none;
+}
+
+
+.svg-wrapper {
+  margin: 0 auto;
+  width: 320px;  
+  display: block;
+}
+
+.svg-wrapper .shape {
+  stroke-dasharray: 140 400;
+  stroke-dashoffset: -400;
+  stroke-width: 8px;
+  stroke-miterlimit:10;
+  fill: transparent;
+  stroke: #fff;
+  border-bottom: 5px solid black;
+  transition: stroke-width 1s, stroke-dashoffset 1s, stroke-dasharray 1s;
+}
+.svg-wrapper svg{
+	margin-bottom:-48px;
+}
+.svg-wrapper .text {
+  font-size: 22px;
+  line-height: 32px;
+  color: #fff;
+  //top: -48px;
+  position: relative;
+  font-family: "helveticaneuecyrlight";
+  display: block;
+}
+.svg-wrapper:hover .shape {
+  stroke-width: 2px;
+  stroke-dashoffset: 0;
+  stroke-dasharray: 660;
 }

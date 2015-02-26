@@ -1,12 +1,19 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>MixedPx</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-<%= yield %>
-</body>
+<html data-ng-app="phb">
+	<head>
+	  <title data-ng-bind="page.title"><%= content_for?(:title) ? yield(:title) : 'PhotoBazaar' %></title>
+	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	  <%= stylesheet_link_tag 'application', media: 'all'%> 
+	  <%= stylesheet_link_tag params[:controller], media: 'all'%>
+	  <%= csrf_meta_tags %>
+	  <base href="<%= request.original_fullpath %>">
+	  <%= favicon_link_tag 'favicon.ico' %>
+	  <%= yield :stylesheets %>
+	  <%= javascript_include_tag 'application' %>
+	</head>
+	<body data-ng-cloak data-loading-status>
+		<%= content_for?(:content) ? yield(:content) : yield %>
+	<%= javascript_include_tag params[:controller] %>
+	</body>
 </html>

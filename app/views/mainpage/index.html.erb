@@ -1,1 +1,69 @@
-<p>MixedPx app</p>
+<% content_for :stylesheets do %> 
+<style type="text/css">
+    .siteHeader .bg_image{
+        background: <%= @best_photo_of_day.base_color%> url(<%= @best_photo_of_day.thumbnails.url(:compressed) %>) no-repeat center center;
+        background-size: cover;
+        color: #ffffff;
+    }
+    .cloak {
+        background: <%= @best_photo_of_day.base_color%>;
+    }
+</style>
+<% end %>
+<% content_for :content do %> 
+<header animated-fullframe-bg class="siteHeader">
+        <div class="logobox">
+                <svg version="1.2" baseProfile="tiny" id="logo_svg"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="118px" height="85px"
+                      xml:space="preserve" viewbox="0 0 120 85">
+                    <path d="M10.709,17.361h96.502
+                            c1.631,0,2.954,1.323,2.954,2.954v61.052c0,1.632-1.323,2.954-2.954,2.954H10.709c-1.632,0-2.954-1.323-2.954-2.954V20.315
+                            C7.755,18.683,9.077,17.361,10.709,17.361z"/>
+                    <path d="M45.174,17.361l9.847-16.74h27.572l9.847,16.74"/>
+                    <path d="M68.315,22.284
+                            c15.5,0,28.064,12.565,28.064,28.064S83.814,78.413,68.315,78.413S40.25,65.848,40.25,50.349S52.815,22.284,68.315,22.284z"/>
+                    <path d="M68.315,31.147
+                            c10.605,0,19.202,8.597,19.202,19.202c0,10.605-8.597,19.202-19.202,19.202c-10.605,0-19.202-8.597-19.202-19.202
+                            C49.113,39.744,57.71,31.147,68.315,31.147z"/>
+                    <path d="M30.403,17.361v66.961"/>
+                    <path d="M30.403,39.025h12.228"/>
+                    <path d="M93.997,39.025h16.168"/>
+                    <path d="M99.333,23.269c2.719,0,4.924,2.204,4.924,4.924
+                            s-2.204,4.924-4.924,4.924s-4.924-2.204-4.924-4.924S96.614,23.269,99.333,23.269z"/>
+                    <path d="M110.165,30.162h4.924
+                            c1.088,0,1.969,0.882,1.969,1.969v9.847c0,1.088-0.882,1.969-1.969,1.969h-4.924"/>
+                    <path d="M7.755,43.948H2.831
+                            c-1.088,0-1.969-0.882-1.969-1.969v-9.847c0-1.088,0.882-1.969,1.969-1.969h4.924"/>
+                    <path d="M17.602,17.361v-5.908h18.71v5.908"/>
+                </svg>
+
+            <div class="title">PhotoBazaar<span>alpha</span></div>
+            <div class="description">
+            Лучшие фотографии со всего мира каждый день
+            <div class="ui hidden divider"></div>
+
+            <a class="svg-wrapper" href="/fresh">
+              <svg height="50" width="280" xmlns="http://www.w3.org/2000/svg" viewPort="0 0 50 280">
+                <rect x="0" y="0" class="shape" height="50" width="280" />
+              </svg>
+              <span class="text">смотреть все</span>
+            </a>
+
+            </div>
+        </div>
+        <div class="siteHeader-inner">
+            <div class="ui relaxed inverted list">
+            <div class="item">
+                <img class="ui avatar image" src="<%= @best_photo_of_day.photographer.userpic %>">
+                <div class="content">
+                  <div class="header"><%= @best_photo_of_day.name %></div>
+                  <span>by <%= @best_photo_of_day.photographer.fullname %></span><br><%= @best_photo_of_day.photographer.country %> <%= @best_photo_of_day.photographer.city %>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="siteHeader-name">Фотография дня #<%= @best_photo_of_day_number %></div>
+        <div class="cloak"></div>
+        <div class="bg_image"></div>
+</header>
+<% end %>

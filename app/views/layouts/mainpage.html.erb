@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>MixedPx</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <title>PhotoBazaar</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <%= stylesheet_link_tag 'application', media: 'all'%> 
+  <%= stylesheet_link_tag params[:controller], media: 'all'%>
   <%= csrf_meta_tags %>
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= yield :stylesheets %>
 </head>
-<body>
-<%= yield %>
+<body data-ng-app="phb" data-loading-status>
+<%= content_for?(:content) ? yield(:content) : yield %>
+<%= javascript_include_tag 'application'%>
+<%= javascript_include_tag params[:controller]%>
+<%= render "template/footer" %>
 </body>
 </html>

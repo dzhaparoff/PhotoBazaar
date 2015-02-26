@@ -12,7 +12,7 @@ class ColorChecker
      	Miro.options[:method] = 'histogram'
    end
 
-  attr_accessor :file, :color_count
+  attr_accessor :file, :count
     
   def check        
          
