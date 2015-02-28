@@ -8,7 +8,12 @@
 	return { 
 		restrict : 'AEL',
 		link : function($scope, $element, $attr) {
-			$scope.page.title = $attr.pageTitle;
+
+			if(typeof $scope.page === "undefined") $scope.page = {};
+			$scope.page.title 		  = $attr.pageTitle;
+			$scope.page.content_class = $attr.contentClass;
+			$element.remove();
+			
 		}
 	}
 	}

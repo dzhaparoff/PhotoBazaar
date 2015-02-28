@@ -9,8 +9,9 @@
   <%= csrf_meta_tags %>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= yield :stylesheets %>
+  <base href="<%= request.original_fullpath %>">
 </head>
-<body data-ng-app="phb" data-loading-status>
+<body>
 <%= content_for?(:content) ? yield(:content) : yield %>
 <%= javascript_include_tag 'application'%>
 <%= javascript_include_tag params[:controller]%>

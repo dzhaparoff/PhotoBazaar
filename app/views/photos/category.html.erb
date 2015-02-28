@@ -1,7 +1,7 @@
 <% title "Рубрика "+@cat.name_l18n+" на PhotoBazaar.ru - Лучшие фотографии со всего мира каждый день" %>
 
 <% content_for :stylesheets do %> 
-<style type="text/css">
+<style id="additional_styles" type="text/css">
     .header-wrap{
       display: block;
     }
@@ -18,7 +18,7 @@
 
 <% content_for :content do %>
 <%= render "template/sidebar" %>
-<div class="pusher" data-phb-content>
+<div class="pusher" data-phb-content data-ng-class="page.content_class">
   <%= render "template/top_menu" %>
   <%= render "photos" %>
   <img src="<%= @best_photo_in_category.thumbnails.url(:compressed) %>" width="0" height="0" class="hidden">

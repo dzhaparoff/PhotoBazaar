@@ -11,6 +11,7 @@ class PhotosController < ApplicationController
 	def show
 
 		@photo = Photo.where(id: params[:id]).take
+		#@content_class = 'photo_detail'
 		check_loading_mode
 		
 	end
@@ -28,11 +29,15 @@ class PhotosController < ApplicationController
 		@per_page = Photo.per_page
 		@total = @photos.count
 
+		@page_title = @cat.name_l18n;
+
 		check_loading_mode
 
 	end
 
 	def fresh
+
+		@page_title = 'Свежие фотографии';
 
 		day = Date.today
 		interval = APP_CONFIG['fresh_interval']
@@ -70,6 +75,7 @@ class PhotosController < ApplicationController
 	private
 
 		def check_loading_mode 
+			@content_class = @content_class? @content_class : '';
 			render layout: "ajax_page_load" if params[:mode] == 'ajax_page_load'
 			render layout: "partial" if params[:mode] == 'partial'
 		end

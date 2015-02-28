@@ -26,6 +26,7 @@ body > .pusher {
 	background: #f7f7f7;
 	z-index: 2;
 	position: relative;
+	min-height: 100%;
 }
 
 .ui.loader.page_loader {
@@ -305,9 +306,13 @@ body > .pusher {
 	-webkit-animation: flip .8s ease-in-out forwards;
 	animation: flip .8s ease-in-out forwards;
 }
+
+
 #Photos.grid li:hover {
 	z-index: 1;
 }
+
+
 
 @-webkit-keyframes flip {
 	0% { }
@@ -532,8 +537,15 @@ body > .pusher {
 	opacity: 1;
 }
 
-.header-wrap .header .wrapper .header__center {
-
+.header-wrap .header_title {
+	position: absolute;
+	left:0px;
+	bottom: 550px;
+	font-size: 2.5rem;
+	color: white;
+	text-align: center;
+	width:100%;
+	font-family: "helveticaneuecyrlight";
 }
 
 .header-wrap .header_bg {
@@ -705,6 +717,7 @@ body > .pusher {
 
 .photo_detail {
 	background-color: #101010!important;
+	min-height: 100%;
 }
 
 

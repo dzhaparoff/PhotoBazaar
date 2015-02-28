@@ -1,7 +1,5 @@
-<div class="ui vertical main basic segment">
-       <div class="ui stackable page grid">
+      <div class="ui stackable page photo_detail grid">
         <div class="row">
-    		<img src="<%=@photo.local_image_url%>" alt="">
+    		<img class="ui centered image" src="<%=@photo.thumbnails.url(:compressed)%>" alt="">
         </div>
       </div>
-  </div>

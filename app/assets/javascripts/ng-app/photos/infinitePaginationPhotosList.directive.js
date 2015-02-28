@@ -4,7 +4,7 @@
 	.module('phb')
 	.directive('infinitePaginationPhotosList', infinitePaginationPhotosList);
 	
-	function infinitePaginationPhotosList($location, $http, $compile, $timeout, ngProgress){
+	function infinitePaginationPhotosList($location, $http, $compile, $timeout, $cacheFactory, ngProgress){
 	
 	return {
 
@@ -28,16 +28,19 @@
 				changePageOnScroll,
 				show_page,
 				init_AnimOnScroll,
-				getDummyHeigth,
-				anim_on_scroll;
+				checkAnimationLock,
+				getDummyHeigh,
+				anim_on_scroll,
+				reinit_chache_for_infinite_pagination,
+				dontWaitImages = false;
 
 
 			function scrollListner($scope) {
 	 	
-		 	var scrollDelta = (document.body.scrollHeight - $(window).scrollTop()) - document.body.clientHeight;
-		 	
-		 	if (scrollDelta < 300) 			  show_page('next');
-		 	//if ( $(window).scrollTop() == 0 ) show_page('prev');
+			 	var scrollDelta = (document.body.scrollHeight - $(window).scrollTop()) - document.body.clientHeight;
+			 	if (scrollDelta < 300) show_page('next');
+		 		
+		 		//if ( $(window).scrollTop() == 0 ) show_page('prev');
 
 			}
 
@@ -103,8 +106,9 @@
 								else last_photo_of_the_day = another_photo_of_day.attr('data-number');
 
 							var template = $(data);
-							$compile(template)($scope);
 
+							reinit_chache_for_infinite_pagination(data);
+							
 							var imgLoad = imagesLoaded(template),
 								items_count = template.find('img').length,
 								cur_item = 0;
@@ -124,13 +128,15 @@
 
 								if(navigate_Photos == 'append')   {
 									if(another_photo_of_day != null){
-										var dummy_height = getDummyHeigth(last_photo_of_the_day, height);
+										var dummy_height = getDummyHeigh(last_photo_of_the_day, height);
 										prepend_dummies = angular.element('<li class="dummy full" id="lbph_index_' + last_photo_of_the_day + '"></li>');
 										$element.append( prepend_dummies ).append( template );
 										$('#lbph_index_'+last_photo_of_the_day).css({height: dummy_height});
+										anim_on_scroll._reinit(prepend_dummies.add(template), 0, checkAnimationLock());
 									}
 									else {
 										$element.append( template );
+										anim_on_scroll._reinit(template, 0, checkAnimationLock());
 									}
 								}
 
@@ -144,7 +150,9 @@
 									$('.pusher').append(another_photo_of_day_template)
 								}
 								
-							 	init_AnimOnScroll($scope.id, 0);
+							 	///init_AnimOnScroll($scope.id, 0);
+
+							 	$compile(template)($scope);
 
 							 	$(document).on("scroll", function(){
 									 scrollListner();
@@ -170,16 +178,53 @@
 				 scrollListner();
 			});
 
+			function checkAnimationLock(){
+				
+				var posY = window.scrollY;
+				
+				if( typeof $cacheFactory['scrollPositions_' + $location.absUrl()] !== "undefined" ) {
+
+					if( posY > $cacheFactory['scrollPositions_' + $location.absUrl()] ) {
+						$cacheFactory['scrollPositions_' + $location.absUrl()] = undefined;
+						return false;
+					}
+
+					return true;
+					
+				}
+
+				else return false;
+
+			}
+
+			
+			function reinit_chache_for_infinite_pagination(new_elements){
+
+				if( typeof $cacheFactory[$location.absUrl()] !== "undefined" ) {
+					var $cached = $($cacheFactory[$location.absUrl()]);
+					$cached.find('#Photos').append(new_elements);
+					$cacheFactory[$location.absUrl()] = $("<div></div>").append($cached).html();
+				}
+
+			}
+
 
 			function init_AnimOnScroll(element, viewportFactor) {
+
+				if( $cacheFactory["scrollPositions_" + $location.absUrl()] > 0 ) dontWaitImages = true;
+				else dontWaitImages = false;
+
 				anim_on_scroll = new AnimOnScroll( document.getElementById( element ), {
-						minDuration : 0.4,
-						maxDuration : 0.7,
-						viewportFactor : viewportFactor
+						minDuration    : 0.4,
+						maxDuration    : 0.7,
+						viewportFactor : viewportFactor,
+						dontWaitImages : dontWaitImages,
+						dontAnimate    : checkAnimationLock()
 				});
 			}
 
-			function getDummyHeigth(number, height){
+			function getDummyHeigh(number, height) {
+				
 				var pos_array = [],
 					last_elements,
 					delta,

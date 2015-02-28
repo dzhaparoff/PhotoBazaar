@@ -1,6 +1,6 @@
 (function() { 'use strict';
 
 	angular
-	.module('phb', ['ngProgress', 'ui.router']);
+	.module('phb', ['ngProgress']);
 
 })();

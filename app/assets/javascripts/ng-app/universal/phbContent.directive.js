@@ -7,13 +7,19 @@
 	function phbContent($location, $cacheFactory, $compile, $timeout, PageLoader) {
 	return { 
 		restrict : 'A',
+		controller : function($element){
+			if( typeof $cacheFactory[$location.absUrl()] === 'undefined' ){
+				$cacheFactory[$location.absUrl()] = $element.html();
+			}
+		},
 		link : function($scope, $element, $attr) {
 
 			var location = $location.url(),
 				content = $element,
 				disableLocationListener = false,
 				loader = '<div class="ui large loader page_loader"></div>',
-				getPageFullContent
+				setPageFullContent,
+				setPageCachedContent;
 
 			$scope.$on('disableLocationListener',function(e,v){
 				disableLocationListener = v;
@@ -21,59 +27,53 @@
 
 			$scope.$on('$locationChangeSuccess',function(e,n,o) {
 
-
-				// var old_path = new Url(o);
-				// var new_path = new Url(n);
-
-				// if(new_path.path.match(/\/photo\//) ) content.addClass('photo_detail');
-				// 								else  content.removeClass('photo_detail');
-
 				if( n !== o && !_.isEmpty(n) 
 					&& 
 					!disableLocationListener 
 					) {
 
+					$cacheFactory['scrollPositions_' + o] = window.scrollY;
+					
 					content.empty();
 
-					$('body').append(loader).find('.loader.page_loader').fadeIn(333);
-
-					if( typeof $cacheFactory[n] === 'undefined')
-
-						PageLoader.getPageFullContent(n)
-								  .then(function(d){
-								  			if(d.status == 200){
-												getPageFullContent(d.data)
-												$cacheFactory[n] = d.data;
-								  			}
-								          });
+					if( typeof $cacheFactory[n] === 'undefined'){
+											
+							$('body').append(loader).find('.loader.page_loader').fadeIn(333);
+							PageLoader.getPageFullContent(n)
+									  .then(function(d){
+									  			if(d.status == 200){
+									  				$cacheFactory[n] = d.data;
+													setPageFullContent(d.data)
+									  			}
+									          });
+						}
 					else
-
-						getPageCachedContent($cacheFactory[n]);
+						setPageCachedContent($cacheFactory[n], n);
 
 					}
 
 					
 			});
 
-			function getPageCachedContent(d) {
+			function setPageCachedContent(d,n) {
+
 				var template = $(d),
 					compiled = $compile(template);
 				
 				content.html(template);
 
-				$timeout(function(){
+				$scope.$applyAsync(function(){
+					
 					compiled($scope);
 					compiled = null;
 
-					$('body').find('.loader.page_loader').fadeOut(333,function(){
-							$(this).remove();
-						});
+					window.scrollTo( 0, $cacheFactory['scrollPositions_' + n] );
 
 				});
 
 			}
 
-			function getPageFullContent(d) {
+			function setPageFullContent(d) {
 
 				var data = document.createElement('div'),
 				    template = $(d),

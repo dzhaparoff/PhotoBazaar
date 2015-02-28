@@ -14,12 +14,12 @@
 			$top = $($element).find('.top'),
 			$bottom = $($element).find('.bottom')
 
-		$scope.$applyAsync(function(){
-			$author.popup({
-			    popup : $($element).find('.popup'),
-			    on    : 'hover'
-			});
-		});
+		// $scope.$applyAsync(function(){
+		// 	$author.popup({
+		// 	    popup : $($element).find('.popup'),
+		// 	    on    : 'hover'
+		// 	});
+		// });
 
 		var hash = $attr.baseColor,
 			rgb  = parseInt(hash.substring(1,3),16) + ','+ parseInt(hash.substring(3,5),16) + ','+ parseInt(hash.substring(5,7),16);
@@ -36,18 +36,18 @@
 		
 		$link.hover(
 			function(){
-				$top.velocity('stop').velocity({paddingTop:15},300,[.44,.2,.33,.63]);
-				$bottom.velocity('stop').velocity({paddingBottom:15},300,[.44,.2,.33,.63]);
+				$top.velocity('stop').velocity({translateY:15},300,[.44,.2,.33,.63]);
+				$bottom.velocity('stop').velocity({translateY:-15},300,[.44,.2,.33,.63]);
 				$image.velocity('stop').velocity({scale:1},320,[.49,.15,.27,.83]);
 			},
 			function(){
-				$top.velocity('stop').velocity({paddingTop:0},300,[.44,.2,.33,.63]);
-				$bottom.velocity('stop').velocity({paddingBottom:0},300,[.44,.2,.33,.63]);
+				$top.velocity('stop').velocity({translateY:0},300,[.44,.2,.33,.63]);
+				$bottom.velocity('stop').velocity({translateY:0},300,[.44,.2,.33,.63]);
 				$image.velocity('stop').velocity({scale:1.05},320,[.49,.15,.27,.83]);
 		})
 
 		$element.bind('$destroy', function(){
-			$author.popup('destroy');
+			// $author.popup('destroy');
 			$link.dimmer('destroy');
 			$scope.$destroy();
 		})

@@ -7,13 +7,13 @@
 	  <%= stylesheet_link_tag 'application', media: 'all'%> 
 	  <%= stylesheet_link_tag params[:controller], media: 'all'%>
 	  <%= csrf_meta_tags %>
-	  <base href="<%= request.original_fullpath %>">
+	  <base href="/">
 	  <%= favicon_link_tag 'favicon.ico' %>
 	  <%= yield :stylesheets %>
 	  <%= javascript_include_tag 'application' %>
 	</head>
 	<body data-ng-cloak data-loading-status>
 		<%= content_for?(:content) ? yield(:content) : yield %>
-	<%= javascript_include_tag params[:controller] %>
+		<%= javascript_include_tag params[:controller] %>
 	</body>
 </html>

@@ -84,9 +84,13 @@
 			// The viewportFactor defines how much of the appearing item has to be visible in order to trigger the animation
 			// if we'd use a value of 0, this would mean that it would add the animation class as soon as the item is in the viewport. 
 			// If we were to use the value of 1, the animation would only be triggered when we see all of the item in the viewport (100% of it)
-			viewportFactor : 0
+			viewportFactor : 0,
+      dontWaitImages : false,
+      dontAnimate    : false
 		},
+
 		_init : function() {
+
 			this.items = Array.prototype.slice.call( document.querySelectorAll( '#' + this.el.id + ' > li' ) );
 			this.itemsCount = this.items.length;
 			this.itemsRenderedCount = 0;
@@ -94,35 +98,41 @@
       this.msnry = null;
       this.eventListeners = {};
 
-			var self = this;
-        
-			imagesLoaded( this.el, function() {
-				
-				// initialize masonry
-				self.msnry = new Masonry( self.el, {
-					itemSelector : 'li',
-					transitionDuration : 0
-				} );
-				
-				if( Modernizr.cssanimations ) {
-					// the items already shown...
-					self.items.forEach( function( el, i ) {
-						if( inViewport( el ) && self.options.viewportFactor != 0) {
-							self._checkTotalRendered();
-              classie.add( el, 'shown' );
-							// classie.add( el, 'loading' );
-              // var loading = imagesLoaded(el);
-              //   loading.on( 'done', function( instance ) {
-              //   classie.remove( instance.elements[0], 'loading' );
-              //   loading.off('done');
-              // });
-						}
-            else if(inViewport( el ) && self.options.viewportFactor == 0){
-                self._scrollPage(); 
-            }
-					} );
+			var self = this,
+          build_masonry;
 
-					// animate on scroll the items inside the viewport
+      if(this.options.dontWaitImages === false)
+			   imagesLoaded( this.el, build_masonry);
+       else 
+         build_masonry();
+
+      function build_masonry() {
+
+        self.msnry = new Masonry( self.el, {
+          itemSelector : 'li',
+          transitionDuration : 0
+        } );
+        
+        if( Modernizr.cssanimations ) {
+
+          self.items.forEach( function( el, i ) {
+            if( self.options.dontAnimate == true ) {
+              self._checkTotalRendered();
+              classie.add( el, 'shown' );
+            }
+            else
+                {
+                  if( inViewport( el ) && self.options.viewportFactor != 0) {
+                    self._checkTotalRendered();
+                    classie.add( el, 'shown' );
+                  }
+                  else if(inViewport( el ) && self.options.viewportFactor == 0){
+                      self._scrollPage(); 
+                  }
+                }
+          } );
+
+          // animate on scroll the items inside the viewport
 
           self.eventListeners.scroll = function() {
            self._onScrollFn();
@@ -132,12 +142,35 @@
             self._resizeHandler();
           }
 
-					window.addEventListener( 'scroll', self.eventListeners.scroll, false );
+          window.addEventListener( 'scroll', self.eventListeners.scroll, false );
           window.addEventListener( 'resize', self.eventListeners.resize, false );
-				}
+        }
 
-			});
+        //self.msnry.bindResize();
+
+      }
+
 		},
+
+    _reinit : function(items, vf, da){
+
+      if(da) this.options.dontAnimate = true;
+        else this.options.dontAnimate = false;
+
+      this.options.viewportFactor = vf;
+
+      if(this.options.dontAnimate == true) items.addClass('shown')
+
+      this.items = this.items.concat(items.toArray());
+
+      this.itemsCount = this.items.length;
+
+      this.msnry.appended(items);
+
+      if( this.options.dontAnimate !== true ) 
+        this._scrollPage();
+
+    },
 
     _destroy : function() {
 
@@ -153,11 +186,21 @@
 
 		_onScrollFn : function() {
 
-			var self = this;
-			if( !this.didScroll ) {
-				this.didScroll = true;
-				setTimeout( function() { self._scrollPage(); }, 60 );
-			}
+      if(this.options.dontAnimate == true) {
+
+          this.items.forEach( function( el, i ) {
+            classie.add( el, 'shown' );
+          })
+
+      }
+      else
+			{
+        var self = this;
+        if( !this.didScroll ) {
+          this.didScroll = true;
+          setTimeout( function() { self._scrollPage(); }, 60 );
+        }
+      }
 
 		},
 
@@ -181,11 +224,17 @@
 							el.style.MozAnimationDuration = randDuration;
 							el.style.animationDuration = randDuration;
 						}
+            else {
+              el.style.WebkitAnimationDuration = 0;
+              el.style.MozAnimationDuration = 0;
+              el.style.animationDuration = 0;
+            }
 						
 						classie.add( el, 'animate' );
 					}, 25 );
 				}
 			});
+      
 			this.didScroll = false;
 		},
 
