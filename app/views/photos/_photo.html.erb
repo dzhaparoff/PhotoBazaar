@@ -1,5 +1,5 @@
 <li data-photo-item-in-list class="photo" id="Photo_<%=photo.id%>" data-page="<%= @page %>" base-color="<%= photo.base_color%>" data-bp-number="<%= @last_bp_number %>">
-	<a href="/photo/<%= photo.id %>" data-photo-id="<%=photo.id%>">
+	<a href="/photo/<%= photo.id %><%= @detail_link_suffix unless @detail_link_suffix.nil?%>" data-photo-id="<%=photo.id%>">
 	<div class="image_overflow"><img src="<%= photo.thumbnails.url(:big) %>" class="ui fluid image"></div>
 	<div class="ui dimmer">
 	  <div class="content">

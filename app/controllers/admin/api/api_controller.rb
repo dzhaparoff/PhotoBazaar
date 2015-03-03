@@ -22,12 +22,43 @@ class Admin::Api::ApiController < Admin::AdminController
 	end
 
 	def get_photo
-
 	 	response = F00px.get( 'photos/'+params[:id], params )
 		@response_hash = JSON.parse(response.body)
 		render json: @response_hash
 
-	 end
+	end
+
+	def sync_old_photos
+		
+		renderOut = String.new
+
+		Photo.where('id <= ? AND id >= ?', params[:end], params[:start]).find_each(batch_size: 10) do |photo|
+
+			 response_promise = F00px.get( 'photos/'+photo.photo_id.to_s )
+			 response = JSON.parse(response_promise.body)
+			
+			photo_f = response["photo"]
+
+			unless photo_f == nil
+
+			photo.iso = photo_f["iso"]
+			photo.focal_length = photo_f["focal_length"]
+			photo.shutter_speed = photo_f["shutter_speed"]
+			photo.aperture = photo_f["aperture"]
+			photo.latitude = photo_f["latitude"]
+			photo.longitude = photo_f["longitude"]
+
+			photo.save
+
+			renderOut << photo.id.to_s + " - Обновлен \n\r"
+
+			end
+
+		end
+
+		render text: renderOut
+
+	end
 
 	private 
 

@@ -11,7 +11,50 @@ class PhotosController < ApplicationController
 	def show
 
 		@photo = Photo.where(id: params[:id]).take
-		#@content_class = 'photo_detail'
+		@colors = @photo.colors
+
+		@photo_next = @photo.next_in_cat
+		@photo_pre = @photo.previous_in_cat
+
+		@photo_next_link = photo_page_path @photo_next.id unless @photo_next.nil?
+		@photo_pre_link = photo_page_path @photo_pre.id unless @photo_pre.nil?
+
+		@content_class = 'photo_detail'
+
+		check_loading_mode
+		
+	end
+
+	def user_photo
+
+		@photo = Photo.where(id: params[:id]).take
+		@colors = @photo.colors
+
+		@photo_next = @photo.next_in_user
+		@photo_pre = @photo.previous_in_user
+
+		@photo_next_link = user_photo_page_path @photo_next.id unless @photo_next.nil?
+		@photo_pre_link = user_photo_page_path @photo_pre.id unless @photo_pre.nil?
+
+		@content_class = 'photo_detail'
+
+		check_loading_mode
+		
+	end
+
+	def fresh_photo
+
+		@photo = Photo.where(id: params[:id]).take
+		@colors = @photo.colors
+
+		@photo_next = @photo.next_in_fresh
+		@photo_pre = @photo.previous_in_fresh
+
+		@photo_next_link = fresh_photo_page_path @photo_next.id unless @photo_next.nil?
+		@photo_pre_link = fresh_photo_page_path @photo_pre.id unless @photo_pre.nil?
+
+		@content_class = 'photo_detail'
+		
 		check_loading_mode
 		
 	end
@@ -67,6 +110,8 @@ class PhotosController < ApplicationController
 	        @last_bp_number = @photo_of_current_page_number
 	        
         end
+
+        @detail_link_suffix = '/from_fresh'
 
 		check_loading_mode
 

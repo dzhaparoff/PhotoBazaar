@@ -53,6 +53,30 @@
 				}
 			}
 			]
+		},
+		next : {
+			url : '/images/svg/next.svg',
+			animation : [
+			{
+				el : '.cls-2',
+				animProperties:{
+					from : { val: '{"transform" : "t0 0" , "path" : "M4,44l-4-3l17-19L0,3l4-3l20,22L4,44z"}' },
+					to   : { val: '{"transform" : "t0 10" , "path" : "M41.2,27L38,25.364L46.945,15H0v-3h46.945L38,1.636L41.2,0L53,13.5L41.2,27z"}' }
+				}
+			}
+			]
+		},
+		prev : {
+			url : '/images/svg/prev.svg',
+			animation : [
+			{
+				el : '.cls-2',
+				animProperties:{
+					from : { val: '{"transform" : "t0 0" , "path" : "M0,22L20,0l4,3L7,22l17,19l-4,3L0,22z"}' },
+					to   : { val: '{"transform" : "t0 10" , "path" : "M0,13.5L11.8,0L15,1.636L6.055,12H53v3H6.055L15,25.364L11.8,27L0,13.5z"}' }
+				}
+			}
+			]
 		}
 	}
 

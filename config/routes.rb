@@ -36,8 +36,10 @@ Rails.application.routes.draw do
   #resources :categories, only: [:index, :show]
 
   get 'fresh' => 'photos#fresh', as: :fresh_photos_page
-
-  get 'photo/:id' => 'photos#show'
+ 
+  get 'photo/:id' => 'photos#show', as: :photo_page
+  get 'photo/:id/from_user' => 'photos#user_photo', as: :user_photo_page
+  get 'photo/:id/from_fresh' => 'photos#fresh_photo', as: :fresh_photo_page
   
   get ':cat_slug', to: 'photos#category', as: :categories
 

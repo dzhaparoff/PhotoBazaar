@@ -16,4 +16,12 @@ module ApplicationHelper
 		day = Date.today
 		fresh_photos_count = Photo.where(:created_at => ((day-interval).beginning_of_day .. day.end_of_day)).size
 	end
+
+	def format_city_country user
+		format = String.new
+		format << " - " << user.city if user.city.size
+		format << ", " if (user.city.size > 0 && user.country.size > 0)
+		format << user.country if user.country.size
+		return format
+	end
 end

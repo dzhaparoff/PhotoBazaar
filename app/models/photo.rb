@@ -15,12 +15,14 @@ class Photo < ActiveRecord::Base
   	 },
   	 :convert_options => {
        :all => "-quality 75 -strip",
-       :compressed => "-quality 65" 
+       :compressed => "-quality 75" 
      }
 
   	 do_not_validate_attachment_file_type :thumbnails
 
   	 validates :photo_id, uniqueness: { case_sensitive: false }
+
+    before_save :extract_dimensions
 
   self.per_page = 21
 
@@ -51,5 +53,47 @@ class Photo < ActiveRecord::Base
   def self.search(search)
       unscope(:order).where('name LIKE ?', "%#{search}%")
   end
+
+  def next_in_cat
+    self.class.unscope(:order).where("id > ? AND category_id = ?", id, category_id).first
+  end
+
+  def previous_in_cat
+    self.class.unscope(:order).where("id < ? AND category_id = ?", id, category_id).last
+  end
+
+  def next_in_user
+    self.class.unscope(:order).where("id > ? AND photographer_id = ?", id, photographer_id).first
+  end
+
+  def previous_in_user
+    self.class.unscope(:order).where("id < ? AND photographer_id = ?", id, photographer_id).last
+  end
+
+  def next_in_fresh
+    day = Date.today
+    interval = APP_CONFIG['fresh_interval']
+    self.class.unscope(:order).where(:created_at => ((day-interval).beginning_of_day .. day.end_of_day)).where("created_at > ?", created_at).first
+  end
+
+  def previous_in_fresh
+    day = Date.today
+    interval = APP_CONFIG['fresh_interval']
+    self.class.unscope(:order).where(:created_at => ((day-interval).beginning_of_day .. day.end_of_day)).where("created_at < ?", created_at).last
+  end
+
+  private
+
+      def extract_dimensions
+
+          tempfile = "public/" + self.local_image_url
+
+          unless tempfile.nil?
+              geometry = Paperclip::Geometry.from_file(tempfile)
+              self.width = geometry.width.to_i
+              self.height = geometry.height.to_i
+          end
+
+      end
 
 end

@@ -43,7 +43,7 @@ class Admin::Api::PhotosController < Admin::AdminController
         colors.file = 'public'+params['local_image_url']
         checked_colors = colors.check
         photo['colors'] = checked_colors
-        photo['base_color'] = checked_colors[0][:hex]
+        photo['base_color'] = checked_colors[0][:hexOriginal]
         photo['base_color_name'] = checked_colors[0][:colorName]
        
         photo.thumbnails = URI.parse(params['image_url'])

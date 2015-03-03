@@ -15,18 +15,12 @@
 				header_menu = $element.find('.page'),
 				body = document.body,
     			scrolling,
-    			requestID
-
-    		$scope.sidebar_toggle = sidebar_toggle;
+    			requestID    		
 
     		$element.css({height: window.innerHeight*.8 });
 
 			document.addEventListener("scroll",setScroll,false);
 			document.addEventListener("mousewheel",setScroll,false);
-
-			function sidebar_toggle(){
-    			$('.main_sidebar').sidebar('toggle');
-    		}
 
     		function setScroll() {
 				scrolling = true;

@@ -10,9 +10,10 @@
 		link : function($scope, $element, $attr) {
 
 			if(typeof $scope.page === "undefined") $scope.page = {};
-			$scope.page.title 		  = $attr.pageTitle;
-			$scope.page.content_class = $attr.contentClass;
-			$element.remove();
+				
+				$scope.page.title 		  = $attr.pageTitle;
+				$scope.page.content_class = $attr.contentClass;
+				//$element.remove();
 			
 		}
 	}

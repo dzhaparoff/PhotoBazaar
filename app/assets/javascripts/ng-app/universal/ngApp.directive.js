@@ -8,9 +8,13 @@
 	return { 
 		restrict : 'A',
 		link : function($scope, $element, $attr) {
-			$scope.page = {};
-			$scope.page.title = $element.find('title').html();
-			$scope.page.content_class = null;
+			
+			if(typeof $scope.page === "undefined") {
+				$scope.page = {};
+				$scope.page.title = $element.find('title').html();
+				$scope.page.content_class = null;
+			}
+			
 		}
 	}
 	}
