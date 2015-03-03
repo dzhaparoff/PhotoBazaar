@@ -1,18 +1,19 @@
 <div class="ui page stackable grid photo_detail_inner" data-ng-controller="photoDetailController as photo" data-ng-cloak>
-	<div class="row image_row" data-ng-class="photo.mainImage.rowClass" data-phb-keydown="photo.toggleFullRes" data-height="<%=@photo.height %>" data-width="<%=@photo.width %>" data-ng-style="photo.mainImage.containerStyle">
+	<div data-mouse-pan-bg class="row image_row" data-ng-class="photo.mainImage.rowClass" data-phb-keydown="photo.toggleFullRes" data-height="<%=@photo.height %>" data-width="<%=@photo.width %>" data-ng-style="photo.mainImage.containerStyle">
 		<div class="nav left two wide column">
 		<% unless @photo_next_link.nil? %><a data-phb-keydown="photo.showPrevPhoto" href="<%= @photo_next_link %>">
 			<span data-svg-icon data-icon-name="prev" width="53" height="44" data-viewbox="0 0 60 44" data-speed="350" data-easing="backout" class="icon"></span></a>
 		<% end %>
 		</div>
 		<div class="photo twelve wide column">
-			<img class="ui centered image" src="<%=@photo.thumbnails.url(:compressed)%>" alt="<%=@photo.name%>" data-ng-style="photo.mainImage.imageStyle">
+			<img class="ui centered image" src="<%=@photo.thumbnails.url(:original)%>" alt="<%=@photo.name%>" data-ng-style="photo.mainImage.imageStyle">
 		</div>
 		<div class="nav right two wide column">
 		<% unless @photo_pre_link.nil? %><a data-phb-keydown="photo.showNextPhoto" href="<%= @photo_pre_link %>">
 			<span data-svg-icon data-icon-name="prev" width="53" height="44" data-viewbox="0 0 60 44" data-speed="350" data-easing="backout" class="icon"></span></a>
 		<% end %>
 		</div>
+		<div class="photo_maximized"></div>
 	</div>
 
 	<div class="colors row">

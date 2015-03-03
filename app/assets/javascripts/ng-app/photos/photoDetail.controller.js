@@ -58,6 +58,8 @@
 					var width = $attr.width,
 						height = $attr.height
 
+					if( $('.photo.column').height() >= height ) return false;
+
 					if ( self.mainImage.containerStyle['height'] == height)
 					{
 					
@@ -68,7 +70,13 @@
 					else
 					{
 						self.mainImage.containerStyle['height'] = height
-						self.mainImage.rowClass = 'maximized'
+						self.mainImage.rowClass = ['maximized','mouse_pan_active']
+						
+						if( width <= $('.photo.column').width())
+							self.mainImage.rowClass.push('small');
+
+						if( width < height)
+							self.mainImage.rowClass.push('vertical');
 					}
 
 				});

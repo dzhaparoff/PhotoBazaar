@@ -66,7 +66,7 @@
 						document.removeEventListener("mousewheel", setScroll, false);
 
 						window.cancelAnimationFrame(requestID)
-						requestID = undefined;
+						requestID = null;
 					})
 
 		}

@@ -6,16 +6,14 @@
 		background-color: <%=color["hexOriginal"]%>;
 	}
 	<%end%>
-	.image_row::after {
-		background-image: url(<%=@photo.thumbnails.url(:compressed)%>);
+	.image_row .photo_maximized {
+		background-image: url(<%=@photo.thumbnails.url(:original)%>);
 	}
-	
 	<%if @photo.height > @photo.width then%>
-	.image_row::after {
+	.image_row .photo_maximized {
 		background-size: contain!important;
 	}
 	<%end%>
-	
 </style>
 <% end %>
 

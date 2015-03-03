@@ -60,6 +60,18 @@ class Admin::Api::ApiController < Admin::AdminController
 
 	end
 
+	def resave_all_photos
+
+		Photo.find_each(batch_size: 50) do |photo|
+
+			photo.save
+
+		end
+
+		render text: 'all_done'
+
+	end
+
 	private 
 
 	def fh_photos_search (params)

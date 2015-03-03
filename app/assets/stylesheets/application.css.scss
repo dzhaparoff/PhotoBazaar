@@ -741,7 +741,7 @@ body > .pusher {
 		position: relative;
 	}
 
-	.image_row:after {
+	.image_row .photo_maximized {
 		opacity: 0;
 		transition: opacity 0.4s ease;
 		background-size: cover;
@@ -756,8 +756,12 @@ body > .pusher {
 		z-index: 0;
 	}
 
-	.row.maximized.image_row:after {
+	.row.maximized.image_row .photo_maximized {
 		opacity: 1;
+	}
+
+	.row.maximized.image_row.small .photo_maximized, .row.maximized.image_row.vertical .photo_maximized {
+		background-size: contain!important;
 	}
 
 	.row.maximized.image_row > .photo.column {
