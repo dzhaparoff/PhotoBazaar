@@ -878,4 +878,29 @@ body > .pusher {
 		color:#fff;
 	}
 
+	.exif.column {
+		.item {
+			// width:49%;
+			// display:inline-block;
+		}
+		.maplink {
+			width:100%;
+			text-align: center;
+		}
+	}
+
+	.help.column {
+		transition: opacity 0.4s ease;
+		opacity:0.4;
+		text-align: center!important;
+	}
+
+	.help.column:hover {
+			opacity:1;
+	}
+
+	.column .map {
+		//width:100%;
+	}
+
 }

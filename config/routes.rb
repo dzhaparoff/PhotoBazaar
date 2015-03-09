@@ -26,14 +26,9 @@ Rails.application.routes.draw do
           post '/:action' => 'api' #non RESTful api
       end
   end
-    
-  get 'images/get_top_fl'
-  get 'images/get_top_fh'
-  get 'images/' => 'images#index'
 
-
-  resources :photos, only: [:index]
-  #resources :categories, only: [:index, :show]
+  
+  get 'api/:action' => 'api'
 
   get 'fresh' => 'photos#fresh', as: :fresh_photos_page
  
@@ -42,7 +37,5 @@ Rails.application.routes.draw do
   get 'photo/:id/from_fresh' => 'photos#fresh_photo', as: :fresh_photo_page
   
   get ':cat_slug', to: 'photos#category', as: :categories
-
-
   
 end

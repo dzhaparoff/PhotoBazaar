@@ -1,4 +1,4 @@
-<div class="ui page stackable grid photo_detail_inner" data-ng-controller="photoDetailController as photo" data-ng-cloak>
+<div class="ui page stackable grid photo_detail_inner" data-ng-controller="photoDetailController as photo" data-ng-cloak data-ng-init="photo.id = <%=@photo.id%>">
 	<div data-mouse-pan-bg class="row image_row" data-ng-class="photo.mainImage.rowClass" data-phb-keydown="photo.toggleFullRes" data-height="<%=@photo.height %>" data-width="<%=@photo.width %>" data-ng-style="photo.mainImage.containerStyle">
 		<div class="nav left two wide column">
 		<% unless @photo_next_link.nil? %><a data-phb-keydown="photo.showPrevPhoto" href="<%= @photo_next_link %>">
@@ -36,20 +36,57 @@
 			</h1>
 			<p><noindex><%==@photo.description %></noindex></p>
 		</div>
-		<div class="column">
-			<div class="ui inverted list">
-				<%==semantic_list_item 'Камера', @photo.camera.name, '' if @photo.camera%>
-				<%==semantic_list_item 'Объектив', @photo.lens, ''%>
-				<%==semantic_list_item 'Фокусное расстояние', @photo.focal_length, 'мм'%>
-				<%==semantic_list_item 'ISO', @photo.iso, ''%>
-				<%==semantic_list_item 'Выдержка', @photo.shutter_speed, 'с'%>
-				<%==semantic_list_item 'Диафрагма', @photo.aperture, ''%>
-				<%==map_link_tag @photo.latitude, @photo.longitude%>
-			</div>
+		<div class="column exif">
+			<div class="ui stackable two column grid">
+				<div class="column">
+					<div class="ui inverted list">
+						<%==semantic_list_item 'Камера', @photo.camera.name, '' if @photo.camera%>
+						<%==semantic_list_item 'Объектив', @photo.lens, ''%>
+						<%==semantic_list_item 'Фокусное расстояние', @photo.focal_length, 'мм'%>
+						<%==semantic_list_item 'ISO', @photo.iso, ''%>
+						<%==semantic_list_item 'Выдержка', @photo.shutter_speed, 'с'%>
+						<%==semantic_list_item 'Диафрагма', @photo.aperture, ''%>
+					</div>
+				</div>
+				<div class="column">
+					<div class="ui inverted list">
+						<div class="item"><label>Рубрика:</label> <%=@photo.category.name_l18n %></div>
+						<div class="item"><label>Опубликовано:</label> <span class="time" created-at="<%= @photo.created_at %>"><%= @photo.created_at %></span></div>
+						<!--<%unless @photo.taken_at.nil?%><div class="item"><label>Сфотографировано:</label> <span class="time" created-at="<%= @photo.taken_at %>"><%= @photo.taken_at %></span></div><%end%>-->
+					</div>
+				</div>
+			</div> 
+			
 		</div>
 		<div class="column">
-			
+			<!-- <div class="likebox">
+				<div class="like vkontakte" data-likebox="vkontakte">Лайкнуть <span data-ng-bind="like.count"></span></div>
+			</div> -->
+			<%==static_map_tag @photo.longitude, @photo.latitude, '400x110', '10'%>
 		</div>
 	</div>
 	<div class="ui hidden section divider"></div>
+
+	<div class="row">
+		<div class="centered ten wide help column">
+
+			<div class="ui relaxed small horizontal list">
+				<div class="item">Быстрые клавиши:</div>
+				<div class="item">
+					<span data-svg-icon data-icon-name="left_key" width="20" height="20" data-viewbox="0 0 32 32" data-speed="350" data-easing="backout" class="icon"></span>
+					<div class="content aligned">Предыдущее фото</div>
+				</div>
+				<div class="item">
+					<span data-svg-icon data-icon-name="right_key" width="20" height="20" data-viewbox="0 0 32 32" data-speed="350" data-easing="backout" class="icon"></span>
+					<div class="content aligned">Cледующее фото</div>
+				</div>
+				<div class="item">
+					<span data-svg-icon data-icon-name="m_key" width="20" height="20" data-viewbox="0 0 32 32" data-speed="350" data-easing="backout" class="icon"></span>
+					<div class="content aligned">Увеличить</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 </div>

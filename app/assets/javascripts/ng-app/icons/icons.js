@@ -77,6 +77,21 @@
 				}
 			}
 			]
+		},
+		left_key : {
+			url : '/images/svg/left_key.svg',
+			animation : [
+			]
+		},
+		m_key : {
+			url : '/images/svg/m_key.svg',
+			animation : [
+			]
+		},
+		right_key : {
+			url : '/images/svg/right_key.svg',
+			animation : [
+			]
 		}
 	}
 

@@ -8,6 +8,12 @@ class PhotosController < ApplicationController
 		end
 	end
 
+	def photos_of_the_day 
+
+		last_photo_of_the_day_number = Photo.publish_dates_count
+
+	end
+
 	def show
 
 		@photo = Photo.where(id: params[:id]).take
