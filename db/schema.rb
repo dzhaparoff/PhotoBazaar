@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150117155652) do
+ActiveRecord::Schema.define(version: 20150309105348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "best_photo_of_the_days", force: true do |t|
+    t.integer  "photo_id"
+    t.date     "day"
+    t.integer  "number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "best_photo_of_the_days", ["photo_id"], name: "index_best_photo_of_the_days_on_photo_id", using: :btree
 
   create_table "cameras", force: true do |t|
     t.string   "name"

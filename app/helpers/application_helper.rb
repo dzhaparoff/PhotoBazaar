@@ -19,9 +19,9 @@ module ApplicationHelper
 
 	def format_city_country user
 		format = String.new
-		format << " - " << user.city if user.city.size
+		format << " - " << user.city.titleize if ( user.city.size > 0 )
 		format << ", " if (user.city.size > 0 && user.country.size > 0)
-		format << user.country if user.country.size
+		format << user.country.titleize if user.country.size > 0
 		return format
 	end
 end

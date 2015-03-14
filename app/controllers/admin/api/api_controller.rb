@@ -72,6 +72,37 @@ class Admin::Api::ApiController < Admin::AdminController
 
 	end
 
+################
+
+	def resave_best_photos
+
+		day = Photo.first_photo.created_at.to_date
+		first_photo_day = Date.today
+
+		log = String.new
+
+		begin
+
+			begin 
+
+			  log << ' ' << day.to_s
+
+			  best_photo_of_day = Photo.best_photos_of_the_day(day).take
+
+			  best_photo_of_day.save unless best_photo_of_day.nil?
+
+			  day = day + 1
+
+			end while best_photo_of_day == nil
+
+		end while day <= first_photo_day
+
+		render text: 'all_done ' << log
+
+	end
+
+##############
+
 	private 
 
 	def fh_photos_search (params)

@@ -1,0 +1,35 @@
+<% title "Фотографии дня" %>
+
+<% content_for :stylesheets do %> 
+<style id="additional_styles" type="text/css">
+    .header-wrap{
+      display: block;
+    }
+    .header_bg{
+        
+        background-size: cover;
+        color: #ffffff;
+    }
+    .header_bg_cloak {
+      
+    }
+</style>
+<% end %>
+
+<% content_for :content do %>
+<%= render "template/sidebar" %>
+<div class="pusher" data-phb-content data-ng-class="page.content_class">
+  <%= render "template/top_menu_fixed" %>  <%= render "photos" %>
+  <%= render "template/footer" %>
+</div>
+<% end %>
+
+<% content_for :partial_render do %><!-- вывод партиала для бесконечной подгрузки в ленте -->
+  <%= render @photos %>
+<% end %>
+
+<% content_for :ajax_page_load_content do %>
+  <%= render "template/top_menu_fixed" %>
+  <%= render "photos" %>
+  <%= render "template/footer" %>
+<% end %>

@@ -29,12 +29,14 @@ Rails.application.routes.draw do
 
   
   get 'api/:action' => 'api'
-
-  get 'fresh' => 'photos#fresh', as: :fresh_photos_page
  
   get 'photo/:id' => 'photos#show', as: :photo_page
   get 'photo/:id/from_user' => 'photos#user_photo', as: :user_photo_page
   get 'photo/:id/from_fresh' => 'photos#fresh_photo', as: :fresh_photo_page
+  get 'photo/:id/from_bpod' => 'photos#bpod_photo', as: :bpod_photo_page
+
+  get 'fresh' => 'photos#fresh', as: :fresh_photos_page
+  get 'photos_of_the_day' => 'photos#photos_of_the_day', as: :photos_of_the_day_page
   
   get ':cat_slug', to: 'photos#category', as: :categories
   

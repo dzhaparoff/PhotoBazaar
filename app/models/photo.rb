@@ -1,7 +1,8 @@
 class Photo < ActiveRecord::Base
 	belongs_to :photographer
 	belongs_to :category
-	belongs_to :camera
+  belongs_to :camera
+	has_one :best_photo_of_the_day, inverse_of: :photo
 
   has_one :seo, :as => :resource
 
@@ -23,6 +24,7 @@ class Photo < ActiveRecord::Base
   	 validates :photo_id, uniqueness: { case_sensitive: false }
 
     before_save :extract_dimensions
+    after_save :check_best_photo
 
   self.per_page = 21
 
@@ -82,6 +84,16 @@ class Photo < ActiveRecord::Base
     self.class.unscope(:order).where(:created_at => ((day-interval).beginning_of_day .. day.end_of_day)).where("created_at < ?", created_at).last
   end
 
+  def next_in_bpod
+    bpod_next = BestPhotoOfTheDay.where("day > ?", self.created_at.to_date).first
+    self.class.where(id: bpod_next.photo.id).take unless bpod_next.photo.nil? unless bpod_next.nil?
+  end
+
+  def previous_in_bpod
+    bpod_pre = BestPhotoOfTheDay.where("day < ?", self.created_at.to_date).last
+    self.class.where(id: bpod_pre.photo.id).take unless bpod_pre.photo.nil? unless bpod_pre.nil?
+  end
+
   private
 
       def extract_dimensions
@@ -93,6 +105,62 @@ class Photo < ActiveRecord::Base
               self.width = geometry.width.to_i
               self.height = geometry.height.to_i
           end
+
+      end
+
+      def check_best_photo
+
+         if self.created_at.nil? then
+            date = Date.today
+         else
+            date = self.created_at
+         end
+
+         best_photo_of_day = Photo.best_photos_of_the_day(date).take
+         first_photo_day   = Photo.first_photo.created_at.to_date
+         best_photo_of_day_number = (date.to_date - first_photo_day).to_int
+
+         if best_photo_of_day.nil? then
+
+            best_photo = BestPhotoOfTheDay.new
+
+            best_photo.photo_id = self.id
+            best_photo.number = best_photo_of_day_number
+            best_photo.day = date
+
+            best_photo.save
+
+         else
+
+            if BestPhotoOfTheDay.where(number: best_photo_of_day_number).take.nil? then
+
+                  best_photo = BestPhotoOfTheDay.new
+
+                  best_photo.photo_id = self.id
+                  best_photo.number = best_photo_of_day_number
+                  best_photo.day = date
+
+                  best_photo.save
+
+            else
+
+                if self.highest_rating > best_photo_of_day.highest_rating && date > best_photo_of_day.created_at then
+
+                  BestPhotoOfTheDay.where(number: best_photo_of_day_number).first_or_create do |best_photo|
+
+                      best_photo.photo_id = self.id
+                      best_photo.number = best_photo_of_day_number
+                      best_photo.day = date
+
+                      best_photo.save
+
+                  end
+
+                end
+
+            end
+
+         end
 
       end
 

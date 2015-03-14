@@ -8,6 +8,6 @@ module TagsHelper
 	end
 
 	def static_map_tag latitude, longitude, size, zoom
-		"<img src=\"https://api.tiles.mapbox.com/v4/edenver.lclgfp63/pin-s+fff(#{latitude},#{longitude})/#{latitude},#{longitude},#{zoom}/#{size}.png?access_token=pk.eyJ1IjoiZWRlbnZlciIsImEiOiIxdU90TFFFIn0.g-uwqqQpGxypPsbyzEFnpw\" class=\"map\" alt=\"map\">" unless latitude == nil && longitude == nil
+		"<div style=\"background-image: url('https://api.tiles.mapbox.com/v4/edenver.lclgfp63/pin-s+fff(#{latitude},#{longitude})/#{latitude},#{longitude},#{zoom}/#{size}.png?access_token=pk.eyJ1IjoiZWRlbnZlciIsImEiOiIxdU90TFFFIn0.g-uwqqQpGxypPsbyzEFnpw')\" class=\"map\"></div>" unless latitude == nil && longitude == nil
 	end
 end

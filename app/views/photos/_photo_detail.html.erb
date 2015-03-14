@@ -31,7 +31,7 @@
 				<img src="<%=@photo.photographer.userpic %>" alt="" class="ui circular avatar image">
 				<div class="content">
 				<%= @photo.name  %>
-				<div class="sub header"><%= @photo.photographer.name %> <%= format_city_country  @photo.photographer%></div>
+				<div class="sub header"><%= @photo.photographer.name.titleize %> <%= format_city_country  @photo.photographer%></div>
 				</div>
 			</h1>
 			<p><noindex><%==@photo.description %></noindex></p>
@@ -50,7 +50,7 @@
 				</div>
 				<div class="column">
 					<div class="ui inverted list">
-						<div class="item"><label>Рубрика:</label> <%=@photo.category.name_l18n %></div>
+						<div class="item"><label>Рубрика:</label> <a href="<%=categories_path @photo.category.code %>"><%=@photo.category.name_l18n %></a></div>
 						<div class="item"><label>Опубликовано:</label> <span class="time" created-at="<%= @photo.created_at %>"><%= @photo.created_at %></span></div>
 						<!--<%unless @photo.taken_at.nil?%><div class="item"><label>Сфотографировано:</label> <span class="time" created-at="<%= @photo.taken_at %>"><%= @photo.taken_at %></span></div><%end%>-->
 					</div>
@@ -59,13 +59,23 @@
 			
 		</div>
 		<div class="column">
-			<!-- <div class="likebox">
-				<div class="like vkontakte" data-likebox="vkontakte">Лайкнуть <span data-ng-bind="like.count"></span></div>
-			</div> -->
-			<%==static_map_tag @photo.longitude, @photo.latitude, '400x110', '10'%>
+			<div class="sharebox">
+				<div class="like vkontakte" data-sharebox="vkontakte" data-link="http://photobazaar.ru/photo/<%=@photo.id%>">
+					<span data-svg-icon data-icon-name="vk" width="60" height="24" data-viewbox="0 0 65 24" data-speed="350" data-easing="backout" class="icon"></span> <span class="count" data-ng-bind="like.count"></span>
+				</div>
+				<div class="like facebook" data-sharebox="facebook" data-link="http://photobazaar.ru/photo/<%=@photo.id%>">
+					<span data-svg-icon data-icon-name="fb" width="60" height="24" data-viewbox="0 0 65 24" data-speed="350" data-easing="backout" class="icon"></span> <span class="count" data-ng-bind="like.count"></span>
+				</div>
+				<div class="like twitter" data-sharebox="twitter" data-link="http://photobazaar.ru/photo/<%=@photo.id%>">
+					<span data-svg-icon data-icon-name="tw" width="60" height="24" data-viewbox="0 0 65 24" data-speed="350" data-easing="backout" class="icon"></span> <span class="count" data-ng-bind="like.count"></span>
+				</div>
+			</div>
+			<div class="ui hidden section divider"></div>
+			<%==static_map_tag @photo.longitude, @photo.latitude, '600x120', '10'%>
 		</div>
 	</div>
 	<div class="ui hidden section divider"></div>
+
 
 	<div class="row">
 		<div class="centered ten wide help column">

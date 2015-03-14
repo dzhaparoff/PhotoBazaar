@@ -8,12 +8,6 @@ class PhotosController < ApplicationController
 		end
 	end
 
-	def photos_of_the_day 
-
-		last_photo_of_the_day_number = Photo.publish_dates_count
-
-	end
-
 	def show
 
 		@photo = Photo.where(id: params[:id]).take
@@ -26,6 +20,13 @@ class PhotosController < ApplicationController
 		@photo_pre_link = photo_page_path @photo_pre.id unless @photo_pre.nil?
 
 		@content_class = 'photo_detail'
+		
+		@another_photos = []
+
+		@another_photos << {
+			title: "Другие фотографии в рубрике #{@photo.category.name_l18n}",
+			photos: @photo.category.photos.where("id > ? AND id < ?", @photo.id - 20, @photo.id + 20).limit(20)
+		}
 
 		check_loading_mode
 		
@@ -65,6 +66,23 @@ class PhotosController < ApplicationController
 		
 	end
 
+	def bpod_photo
+
+		@photo = Photo.where(id: params[:id]).take
+		@colors = @photo.colors
+
+		@photo_next = @photo.next_in_bpod
+		@photo_pre = @photo.previous_in_bpod
+
+		@photo_next_link = bpod_photo_page_path @photo_next.id unless @photo_next.nil?
+		@photo_pre_link = bpod_photo_page_path @photo_pre.id unless @photo_pre.nil?
+
+		@content_class = 'photo_detail'
+		
+		check_loading_mode
+		
+	end
+
 	def category
 
 		@cat = Category.find_by_code(params[:cat_slug].to_s)
@@ -79,6 +97,31 @@ class PhotosController < ApplicationController
 		@total = @photos.count
 
 		@page_title = @cat.name_l18n;
+
+		check_loading_mode
+
+	end
+
+	def photos_of_the_day 
+
+		@page_title = 'Фотографии дня';
+
+		@bpod = BestPhotoOfTheDay.all
+
+		ids = Array.new
+
+		@bpod.each do |best|
+			ids << best.photo_id
+		end
+
+		@photos = Photo.where(id: ids).page(params[:page])
+
+		@page = params[:page] != nil ? params[:page] : 1
+		@per_page = Photo.per_page
+		@total = @photos.count
+
+		@detail_link_suffix = '/from_bpod'
+		@content_class = 'best_photo_of_days'
 
 		check_loading_mode
 

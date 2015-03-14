@@ -256,6 +256,10 @@ body > .pusher {
 
 }
 
+.best_photo_of_days {
+	padding-top:40px;
+}
+
 
 #Photos.grid li.double {
 	width: 66%;
@@ -642,7 +646,7 @@ body > .pusher {
 .ui.left.sidebar.main_sidebar {
 	
 	color: #fff;
-	width: 210px;
+	width: 220px;
 
 	.image.logo {
 		fill: none;
@@ -680,6 +684,19 @@ body > .pusher {
 		}
 	}
 
+}
+
+@media only screen and (max-height: 775px) {
+	
+	.ui.left.sidebar.main_sidebar{
+
+		width: 220px;
+
+		.item.sidebar_footer {
+		position: relative;
+		margin-top: 2rem;
+		}
+	}
 }
 
 #netlab_svg {
@@ -882,6 +899,7 @@ body > .pusher {
 		.item {
 			// width:49%;
 			// display:inline-block;
+			font-size: 0.9rem;
 		}
 		.maplink {
 			width:100%;
@@ -896,11 +914,68 @@ body > .pusher {
 	}
 
 	.help.column:hover {
-			opacity:1;
+			opacity: 1;
 	}
 
 	.column .map {
-		//width:100%;
+		width:100%;
+		height: 120px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
 	}
+
+	.sharebox {
+		text-align: right;
+	}
+
+	.sharebox .like {
+		margin-left:10px;
+		height: 24px;
+		display:inline-block;
+		position: relative;
+		cursor: pointer;
+		transition: fill 0.35s, transform 0.15s;
+	}
+	.sharebox .like .icon {
+		display:block;
+	}
+
+	.sharebox .like .count {
+		pointer-events: none;
+		position:absolute;
+		top: 4px;
+		right: 5px;
+		width: 30px;
+		text-align: center;
+		line-height: 16px;
+		transition: color 0.35s, border 0.35s;
+		padding-top:1px;
+		border-left: 1px solid transparent;
+	}
+
+	.sharebox .like:hover .count {
+		color: #000;
+		font-weight: bold;
+		border-left: 1px solid #555;
+	}
+
+	.sharebox .like:active {
+		transform: scale(0.91);
+	}
+
+	.sharebox .like.vkontakte:active svg path{
+		fill: #517296
+	}
+	
+	.sharebox .like.facebook:active svg path{
+		fill: #8b9dc3
+	}
+
+	.sharebox .like.twitter:active svg path{
+		fill: #c0deed
+	}
+	
+
 
 }
