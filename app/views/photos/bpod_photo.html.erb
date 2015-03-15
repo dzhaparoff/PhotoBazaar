@@ -1,4 +1,4 @@
-<% title "Фото " + @photo.name + ", фотограф " + @photo.photographer.name + " - PhotoBazaar.ru - Лучшие фотографии со всего мира каждый день" %>
+<% title "Фото " + @photo.name + ", фотограф " + @photo.photographer.fullname.titleize + " - PhotoBazaar.ru - Лучшие фотографии со всего мира каждый день" %>
 
 <% content_for :page_meta do %> 
 	<meta name="title" content='Фото "<%= @photo.name %>"' />

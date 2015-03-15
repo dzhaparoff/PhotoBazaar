@@ -31,7 +31,7 @@
 				<img src="<%=@photo.photographer.userpic %>" alt="" class="ui circular avatar image">
 				<div class="content">
 				<%= @photo.name  %>
-				<div class="sub header"><%= @photo.photographer.name.titleize %> <%= format_city_country  @photo.photographer%></div>
+				<div class="sub header"><%= @photo.photographer.fullname.titleize %> <%= format_city_country  @photo.photographer%></div>
 				</div>
 			</h1>
 			<p><noindex><%==@photo.description %></noindex></p>
@@ -66,7 +66,7 @@
 				<div class="like facebook" data-sharebox="facebook" data-link="http://photobazaar.ru/photo/<%=@photo.id%>">
 					<span data-svg-icon data-icon-name="fb" width="60" height="24" data-viewbox="0 0 65 24" data-speed="350" data-easing="backout" class="icon"></span> <span class="count" data-ng-bind="like.count"></span>
 				</div>
-				<div class="like twitter" data-sharebox="twitter" data-link="http://photobazaar.ru/photo/<%=@photo.id%>">
+				<div class="like twitter" data-sharebox="twitter" data-text="Фото <%= @photo.name %> от фотографа <%= @photo.photographer.fullname.titleize %>" data-link="http://photobazaar.ru/photo/<%=@photo.id%>">
 					<span data-svg-icon data-icon-name="tw" width="60" height="24" data-viewbox="0 0 65 24" data-speed="350" data-easing="backout" class="icon"></span> <span class="count" data-ng-bind="like.count"></span>
 				</div>
 			</div>

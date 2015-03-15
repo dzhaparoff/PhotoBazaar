@@ -66,8 +66,8 @@
 
 			},
 
-			share: function(page) {
-				window.open('http://twitter.com/share?url='+page,"","toolbar=0,status=0,width=626,height=436")
+			share: function(page, text) {
+				window.open('http://twitter.com/share?url='+page+'&text='+text,"","toolbar=0,status=0,width=626,height=436")
 			}
 
 		}
@@ -147,11 +147,14 @@
 				
 				{
 					var t,
-						get_count;
+						get_count,
+						text;
+
+					text = $attr.text;
 
 					$element.click(function(){
 
-						tw.share(link);
+						tw.share(link,text);
 
 						$scope.like.count += 1
 

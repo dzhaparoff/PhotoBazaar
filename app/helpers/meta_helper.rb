@@ -5,15 +5,15 @@ module MetaHelper
         
         user = photo.photographer
 
-		description += "Фотограф: #{user.name.titleize}"
+		description += "Фотограф: #{user.fullname.titleize}"
 		
 		description += " - " if ( user.city.size > 0 || user.country.size > 0 )
 		description += "#{user.city.titleize}" if ( user.city.size > 0 )
 		description += ", " if ( user.city.size > 0 && user.country.size > 0)
 		description += "#{user.country.titleize}" if ( user.country.size > 0)
 
-		description += "
-		";
+		description += ".
+";
 
 		description += "Камера: #{photo.camera.name}" unless photo.camera_id.nil?
 		description += ", объектив: #{photo.lens}" if photo.lens.size > 0 unless photo.lens.nil?
@@ -22,7 +22,7 @@ module MetaHelper
 		description += ", диафрагма: #{photo.aperture}" if photo.aperture.size > 0 unless photo.aperture.nil?
 
 		description += "
-		";
+";
 
 		description += "PhotoBazaar.ru - лучшие фотографии со всего мира каждый день"
 		

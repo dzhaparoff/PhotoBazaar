@@ -1,4 +1,4 @@
-<% title "Фото " + @photo.name + ", фотограф " + @photo.photographer.name + " - PhotoBazaar.ru - Лучшие фотографии со всего мира каждый день" %>
+<% title "Фото " + @photo.name + ", фотограф " + @photo.photographer.fullname.titleize + " - PhotoBazaar.ru - Лучшие фотографии со всего мира каждый день" %>
 
 <% content_for :page_meta do %> 
 	<meta name="title" content='Фото "<%= @photo.name %>"' />
@@ -9,12 +9,11 @@
 	<meta property="og:image" content="http://photobazaar.ru<%=@photo.local_image_url%>" />
 	<meta property="og:url" content="http://photobazaar.ru/photo/<%=@photo.id%>" />
 	<meta property="og:site_name" content="PhotoBazaar" />
-	<meta property="twitter:card" value="photo">
-	<meta property="twitter:site" value="PhotoBazaar">
-	<meta property="twitter:title" value="<%= @photo.name %>">
-	<meta property="twitter:creator" value="<%= @photo.photographer.username %>">
-	<meta property="twitter:image:src" value="http://photobazaar.ru<%=@photo.local_image_url%>">
-	<meta property="twitter:domain" value="photobazaar.ru">
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:site" content="PhotoBazaarRu">
+	<meta name="twitter:title" content="<%= @photo.name %>">
+	<meta name="twitter:image:src" content="http://photobazaar.ru<%=@photo.thumbnails.url(:compressed)%>">
+	<meta name="twitter:url" content="http://photobazaar.ru/photo/<%= @photo.id %>">
 <% end %>
 
 <% content_for :stylesheets do %> 

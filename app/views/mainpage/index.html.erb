@@ -57,7 +57,7 @@
                 <img class="ui avatar image" src="<%= @best_photo_of_day.photographer.userpic %>">
                 <div class="content">
                   <div class="header"><%= @best_photo_of_day.name %></div>
-                  <span>by <%= @best_photo_of_day.photographer.fullname %></span><br><%= @best_photo_of_day.photographer.country %> <%= @best_photo_of_day.photographer.city %>
+                  <span>by <%= @best_photo_of_day.photographer.fullname.titleize %></span><br><%= @best_photo_of_day.photographer.country %> <%= @best_photo_of_day.photographer.city %>
                 </div>
             </div>
             </div>

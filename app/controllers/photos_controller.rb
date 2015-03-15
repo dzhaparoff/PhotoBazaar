@@ -139,9 +139,9 @@ class PhotosController < ApplicationController
 		@per_page = Photo.per_page
 		@total = @photos.count
 
-		photo_of_the_day 		  = get_last_photo_of_the_day
-   		@best_photo_of_day 		  = photo_of_the_day[:photo]
-   		@best_photo_of_day_number = photo_of_the_day[:number]
+		photo_of_the_day 		  = BestPhotoOfTheDay.last
+   		@best_photo_of_day 		  = photo_of_the_day.photo
+   		@best_photo_of_day_number = photo_of_the_day.number
         @best_photo_bg_color      = hex_to_rgba @best_photo_of_day.base_color, 0.4
 
         @last_bp_number = @best_photo_of_day_number
@@ -149,10 +149,10 @@ class PhotosController < ApplicationController
         if params[:page].to_i > 1 then
         	
         	cur_page_first_photo_day = @photos.first.created_at.to_date
-        	photo_of_current_page = get_photo_of_the_day cur_page_first_photo_day
+        	photo_of_current_page = BestPhotoOfTheDay.where("day >= ?", cur_page_first_photo_day).first
 
-        	@photo_of_current_page = photo_of_current_page[:photo]
-        	@photo_of_current_page_number = photo_of_current_page[:number]
+        	@photo_of_current_page = photo_of_current_page.photo
+        	@photo_of_current_page_number = photo_of_current_page.number
 	        @photo_of_current_page_bg_color = hex_to_rgba @photo_of_current_page.base_color, 0.4
 
 	        @render_another_photo_of_day = true if params[:mode] == 'partial'
