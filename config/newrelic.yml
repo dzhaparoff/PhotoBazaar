@@ -192,7 +192,7 @@ development:
   <<: *default_settings
   # Turn on communication to New Relic service in development mode
   monitor_mode: true
-  app_name: PhotoBazaar (Development)
+  app_name: PhotoBazaar
 
   # Rails Only - when running in Developer Mode, the New Relic Agent will
   # present performance information on the last 100 transactions you have
@@ -213,6 +213,7 @@ test:
 # incurring any user-visible performance degradation.
 production:
   <<: *default_settings
+  app_name: PhotoBazaar
   monitor_mode: true
 
 # Many applications have a staging environment which behaves

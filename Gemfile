@@ -61,7 +61,7 @@ gem 'omniauth-vkontakte'					#
 
 #gem 'pg_search'
 
-#gem 'newrelic_rpm'
+gem 'newrelic_rpm'
 
 group :development do
 	gem "awesome_print"

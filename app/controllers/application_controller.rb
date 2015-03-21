@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
   	after_filter :set_csrf_cookie_for_ng
 
 	def set_csrf_cookie_for_ng
@@ -47,6 +49,14 @@ class ApplicationController < ActionController::Base
         rgba_color << hex_color[5..6].to_i(16)
 
        return rgba_color * ',' + ',' + opacity.to_s
+
+	end 
+
+	private
+
+	def record_not_found
+
+		render :text => "404 страница не найдена", :status => 404
 
 	end
 

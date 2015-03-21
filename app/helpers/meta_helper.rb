@@ -7,10 +7,10 @@ module MetaHelper
 
 		description += "Фотограф: #{user.fullname.titleize}"
 		
-		description += " - " if ( user.city.size > 0 || user.country.size > 0 )
-		description += "#{user.city.titleize}" if ( user.city.size > 0 )
-		description += ", " if ( user.city.size > 0 && user.country.size > 0)
-		description += "#{user.country.titleize}" if ( user.country.size > 0)
+		description += " - " if ( user.city.size > 0 || user.country.size > 0 ) unless user.city.nil? && user.country.nil?
+		description += "#{user.city.titleize}" if ( user.city.size > 0 ) unless user.city.nil?
+		description += ", " if ( user.city.size > 0 && user.country.size > 0) unless user.city.nil? && user.country.nil?
+		description += "#{user.country.titleize}" if ( user.country.size > 0) unless user.city.nil? && user.country.nil?
 
 		description += ".
 ";
