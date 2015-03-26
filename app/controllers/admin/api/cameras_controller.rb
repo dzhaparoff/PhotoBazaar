@@ -20,7 +20,8 @@ class Admin::Api::CamerasController < Admin::AdminController
 
   def create
     @camera = Camera.new(camera_params)
-    @camera.name.nil? && @camera.name = 'Undefined'
+    @camera.name = 'Undefined' if @camera.name.nil?
+
     if @camera.save
       render json: @camera
     else

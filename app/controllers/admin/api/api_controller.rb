@@ -24,23 +24,23 @@ class Admin::Api::ApiController < Admin::AdminController
   end
 
   def sync_old_photos
-    renderOut = String.new
-    Photo.where('id <= ? AND id >= ?', params[:end], params[:start])
+    render_out = ''
+    Photo
+      .where('id <= ? AND id >= ?', params[:end], params[:start])
       .find_each(batch_size: 10) do |photo|
-        response_promise = F00px.get('photos/' + photo.photo_id.to_s)
-        response = JSON.parse(response_promise.body)
-        photo_f = response['photo']
-        photo.iso = photo_f['iso']
-        photo.focal_length = photo_f['focal_length']
-        photo.shutter_speed = photo_f['shutter_speed']
-        photo.aperture = photo_f['aperture']
-        photo.latitude = photo_f['latitude']
-        photo.longitude = photo_f['longitude']
-        photo.save
-        renderOut << photo.id.to_s + " - Обновлен \n\r"
-      end
+      response_promise = F00px.get('photos/' + photo.photo_id.to_s)
+      response = JSON.parse(response_promise.body)
+      photo_f = response['photo']
+      photo.iso = photo_f['iso']
+      photo.focal_length = photo_f['focal_length']
+      photo.shutter_speed = photo_f['shutter_speed']
+      photo.aperture = photo_f['aperture']
+      photo.latitude = photo_f['latitude']
+      photo.longitude = photo_f['longitude']
+      photo.save
+      render_out << photo.id.to_s + " - Обновлен \n\r"
     end
-    render text: renderOut
+    render text: render_out
   end
 
   def resave_all_photos
@@ -53,27 +53,36 @@ class Admin::Api::ApiController < Admin::AdminController
   def resave_best_photos
     day = Photo.first_photo.created_at.to_date
     first_photo_day = Date.today
-    log = String.new
+    log = ''
     begin
-      begin 
+      begin
         log << ' ' << day.to_s
         best_photo_of_day = Photo.best_photos_of_the_day(day).take
         best_photo_of_day.save unless best_photo_of_day.nil?
-        day = day + 1
-      end while best_photo_of_day == nil
+        day += 1
+      end while best_photo_of_day.nil?
     end while day <= first_photo_day
     render text: 'all_done ' << log
   end
 
-  private 
-    def fh_photos_search (params)
-      response = F00px.get( 'photos/search' , { 'term' => params['term'], 'sort'=> params['sort'] , 'rpp'=> params['rpp'], 'only' => params['category'], 'image_size' => '3' } )
-      response_hash = JSON.parse(response.body)
-      photos = response_hash['photos']      
-        photos.each do |photo|
-          photo['local_image_url'] = '/images/fh_'+photo['id'].to_s+'.'+photo['image_format']
-        end
-      response_hash['photos'] = photos 
-      response_hash
+  private
+
+  def fh_photos_search(params)
+    response = F00px.get('photos/search',
+                         'term' => params['term'],
+                         'sort' => params['sort'],
+                         'rpp' => params['rpp'],
+                         'only' => params['category'],
+                         'image_size' => '3')
+    response_hash = JSON.parse(response.body)
+
+    photos = response_hash['photos']
+
+    photos.each do |photo|
+      photo['local_image_url'] = '/images/fh_' + photo['id'].to_s + '.' + photo['image_format']
+    end
+
+    response_hash['photos'] = photos
+    response_hash
    end
 end
