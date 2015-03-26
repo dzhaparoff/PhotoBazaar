@@ -1,14 +1,14 @@
 class Camera < ActiveRecord::Base
-	
-has_many :photos
-has_one :seo, :as => :resource
+  has_many :photos
+  has_one :seo, as: :resource
 
-validates :name, uniqueness: { case_sensitive: false }
+  validates :name, uniqueness: { case_sensitive: false }
 
-before_create :create_camera_code
+  before_create :create_camera_code
 
   private
-    def create_camera_code
-      self.code = self.name.parameterize
-    end
+
+  def create_camera_code
+    code ||= name.parameterize
+  end
 end

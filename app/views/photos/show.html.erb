@@ -23,7 +23,7 @@
 	}
 	<%end%>
 	.image_row .photo_maximized {
-		background-image: url(<%=@photo.thumbnails.url(:original)%>);
+		background-image: url(<%=@photo.thumbnails.url(:compressed)%>);
 	}
 	<%if @photo.height > @photo.width then%>
 	.image_row .photo_maximized {

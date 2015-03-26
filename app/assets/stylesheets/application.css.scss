@@ -976,6 +976,15 @@ body > .pusher {
 		fill: #c0deed
 	}
 	
-
+	.column .item.license img{
+		width:20px;
+		height:20px;
+		vertical-align: middle;
+		margin: 0px 4px;
+	}
+	.column .item.copyright {
+		font-size: 0.8rem;
+		opacity: 0.8;
+	}
 
 }

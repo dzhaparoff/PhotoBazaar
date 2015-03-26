@@ -58,12 +58,14 @@ gem 'will_paginate'
 gem 'devise'								#https://github.com/plataformatec/devise#getting-started
 gem 'omniauth-facebook'						#
 gem 'omniauth-vkontakte'					#
+gem 'omniauth-500px'						#
 
 #gem 'pg_search'
 
 gem 'newrelic_rpm'
+gem "dynamic_sitemaps"
 
 group :development do
-	gem "awesome_print"
-	gem "binding_of_caller"
+  gem "awesome_print"
+  gem "binding_of_caller"
 end

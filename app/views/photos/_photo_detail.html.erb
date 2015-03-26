@@ -6,7 +6,7 @@
 		<% end %>
 		</div>
 		<div class="photo twelve wide column">
-			<img class="ui centered image" src="<%=@photo.thumbnails.url(:original)%>" alt="<%=@photo.name%>" data-ng-style="photo.mainImage.imageStyle">
+			<img class="ui centered image" src="<%=@photo.thumbnails.url(:compressed)%>" alt="<%=@photo.name%>" data-ng-style="photo.mainImage.imageStyle">
 		</div>
 		<div class="nav right two wide column">
 		<% unless @photo_pre_link.nil? %><a data-phb-keydown="photo.showNextPhoto" href="<%= @photo_pre_link %>">
@@ -52,7 +52,8 @@
 					<div class="ui inverted list">
 						<div class="item"><label>Рубрика:</label> <a href="<%=categories_path @photo.category.code %>"><%=@photo.category.name_l18n %></a></div>
 						<div class="item"><label>Опубликовано:</label> <span class="time" created-at="<%= @photo.created_at %>"><%= @photo.created_at %></span></div>
-						<!--<%unless @photo.taken_at.nil?%><div class="item"><label>Сфотографировано:</label> <span class="time" created-at="<%= @photo.taken_at %>"><%= @photo.taken_at %></span></div><%end%>-->
+						<div class="item license"><label>Лицензия:</label><%==show_photo_license @photo.license_type %></div>
+						<div class="item copyright">Фотография предоставлена сервисом 500px.com</div>
 					</div>
 				</div>
 			</div> 

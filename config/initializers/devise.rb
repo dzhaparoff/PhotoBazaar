@@ -235,6 +235,7 @@ Devise.setup do |config|
 
   config.omniauth :vkontakte, '4733177', 'A3rNN7qArv1g5RSUDsWz', {display: 'popup', lang: 'ru', image_size: 'original', scope: 'friends, photos, email'}
   config.omniauth :facebook, '1636016053293189', 'f53fee0e4ce86a2a540b6d806270dd73'
+  config.omniauth :fiveHundredPx, 'gjUjfJdIlD7sdFRUyGOmHX3sgPl1tr76pSvV4fbv', 'ibDzQIv7dIDb513BTjoURQekoNLO1mBsZ2ogHEnG'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

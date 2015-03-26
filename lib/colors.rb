@@ -1,5 +1,7 @@
 class ColorChecker  
     
+  attr_accessor :file, :count
+
    def initialize(hash)
      @file = hash[:file]
      @count = hash[:count] 
@@ -11,8 +13,6 @@ class ColorChecker
      	Miro.options[:resolution] = '150x150'
      	Miro.options[:method] = 'histogram'
    end
-
-  attr_accessor :file, :count
     
   def check        
          

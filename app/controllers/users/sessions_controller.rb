@@ -3,11 +3,10 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
-     
-     photo_of_the_day = get_last_photo_of_the_day
-     @best_photo_of_day = photo_of_the_day[:photo]
-     @best_photo_of_day_number =photo_of_the_day[:number]
-     super
+    photo_of_the_day = BestPhotoOfTheDay.last
+    @best_photo_of_day = photo_of_the_day.photo
+    @best_photo_of_day_number = photo_of_the_day.number
+    super
   end
 
   # POST /resource/sign_in

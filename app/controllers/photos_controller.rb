@@ -1,177 +1,161 @@
 class PhotosController < ApplicationController
+  def index
+    if params[:search]
+      @photos = Photo.search(params[:search]).page(params[:page])
+    else
+      @photos = Photo.page(params[:page])
+    end
+  end
 
-	def index
-		if(params[:search]) then
-			@photos = Photo.search(params[:search]).page(params[:page])
-		else
-			@photos = Photo.page(params[:page])
-		end
-	end
+  def show
+    @photo = Photo.where(id: params[:id]).take
+    @colors = @photo.colors
 
-	def show
+    @photo_next = @photo.next_in_cat
+    @photo_pre = @photo.previous_in_cat
 
-		@photo = Photo.where(id: params[:id]).take
-		@colors = @photo.colors
+    @photo_next_link = photo_page_path @photo_next.id unless @photo_next.nil?
+    @photo_pre_link = photo_page_path @photo_pre.id unless @photo_pre.nil?
 
-		@photo_next = @photo.next_in_cat
-		@photo_pre = @photo.previous_in_cat
+    @content_class = 'photo_detail'
 
-		@photo_next_link = photo_page_path @photo_next.id unless @photo_next.nil?
-		@photo_pre_link = photo_page_path @photo_pre.id unless @photo_pre.nil?
+    @another_photos = []
 
-		@content_class = 'photo_detail'
-		
-		@another_photos = []
+    # @another_photos << {
+    #   title: "Другие фотографии в рубрике #{@photo.category.name_l18n}",
+    #   photos:
+    #     @photo.category
+    #       .photos
+    #       .where('id > ? AND id < ?', @photo.id - 20, @photo.id + 20)
+    #       .limit(20)
+    # }
 
-		@another_photos << {
-			title: "Другие фотографии в рубрике #{@photo.category.name_l18n}",
-			photos: @photo.category.photos.where("id > ? AND id < ?", @photo.id - 20, @photo.id + 20).limit(20)
-		}
+    check_loading_mode
+  end
 
-		check_loading_mode
-		
-	end
+  def user_photo
+    @photo = Photo.where(id: params[:id]).take
+    @colors = @photo.colors
 
-	def user_photo
+    @photo_next = @photo.next_in_user
+    @photo_pre = @photo.previous_in_user
 
-		@photo = Photo.where(id: params[:id]).take
-		@colors = @photo.colors
+    @photo_next_link = user_photo_page_path @photo_next.id unless @photo_next.nil?
+    @photo_pre_link = user_photo_page_path @photo_pre.id unless @photo_pre.nil?
 
-		@photo_next = @photo.next_in_user
-		@photo_pre = @photo.previous_in_user
+    @content_class = 'photo_detail'
 
-		@photo_next_link = user_photo_page_path @photo_next.id unless @photo_next.nil?
-		@photo_pre_link = user_photo_page_path @photo_pre.id unless @photo_pre.nil?
+    check_loading_mode
+  end
 
-		@content_class = 'photo_detail'
+  def fresh_photo
+    @photo = Photo.where(id: params[:id]).take
+    @colors = @photo.colors
 
-		check_loading_mode
-		
-	end
+    @photo_next = @photo.next_in_fresh
+    @photo_pre = @photo.previous_in_fresh
 
-	def fresh_photo
+    @photo_next_link = fresh_photo_page_path @photo_next.id unless @photo_next.nil?
+    @photo_pre_link = fresh_photo_page_path @photo_pre.id unless @photo_pre.nil?
 
-		@photo = Photo.where(id: params[:id]).take
-		@colors = @photo.colors
+    @content_class = 'photo_detail'
+    check_loading_mode
+  end
 
-		@photo_next = @photo.next_in_fresh
-		@photo_pre = @photo.previous_in_fresh
+  def bpod_photo
+    @photo = Photo.where(id: params[:id]).take
+    @colors = @photo.colors
 
-		@photo_next_link = fresh_photo_page_path @photo_next.id unless @photo_next.nil?
-		@photo_pre_link = fresh_photo_page_path @photo_pre.id unless @photo_pre.nil?
+    @photo_next = @photo.next_in_bpod
+    @photo_pre = @photo.previous_in_bpod
 
-		@content_class = 'photo_detail'
-		
-		check_loading_mode
-		
-	end
+    @photo_next_link = bpod_photo_page_path @photo_next.id unless @photo_next.nil?
+    @photo_pre_link = bpod_photo_page_path @photo_pre.id unless @photo_pre.nil?
 
-	def bpod_photo
+    @content_class = 'photo_detail'
+    check_loading_mode
+  end
 
-		@photo = Photo.where(id: params[:id]).take
-		@colors = @photo.colors
+  def category
+    @cat = Category.find_by_code(params[:cat_slug].to_s)
 
-		@photo_next = @photo.next_in_bpod
-		@photo_pre = @photo.previous_in_bpod
+    @best_photo_in_category  = Photo.best_photo_in_category(@cat.id)
+    @best_photo_bg_color = hex_to_rgba @best_photo_in_category.base_color, 0.4
 
-		@photo_next_link = bpod_photo_page_path @photo_next.id unless @photo_next.nil?
-		@photo_pre_link = bpod_photo_page_path @photo_pre.id unless @photo_pre.nil?
+    @photos = Photo.where(category_id: @cat.id).page(params[:page])
 
-		@content_class = 'photo_detail'
-		
-		check_loading_mode
-		
-	end
+    @page = !params[:page].nil? ? params[:page] : 1
+    @per_page = Photo.per_page
+    @total = @photos.count
 
-	def category
+    @page_title = @cat.name_l18n
 
-		@cat = Category.find_by_code(params[:cat_slug].to_s)
+    check_loading_mode
+  end
 
-		@best_photo_in_category  = Photo.best_photo_in_category(@cat.id)
-		@best_photo_bg_color    = hex_to_rgba @best_photo_in_category.base_color, 0.4
-		
-		@photos = Photo.where(category_id: @cat.id).page(params[:page])
+  def photos_of_the_day
+    @page_title = 'Фотографии дня'
 
-		@page = params[:page] != nil ? params[:page] : 1
-		@per_page = Photo.per_page
-		@total = @photos.count
+    @bpod = BestPhotoOfTheDay.all
 
-		@page_title = @cat.name_l18n;
+    ids = []
 
-		check_loading_mode
+    @bpod.each do |best|
+      ids << best.photo_id
+    end
 
-	end
+    @photos = Photo.where(id: ids).page(params[:page])
 
-	def photos_of_the_day 
+    @page = !params[:page].nil? ? params[:page] : 1
+    @per_page = Photo.per_page
+    @total = @photos.count
 
-		@page_title = 'Фотографии дня';
+    @detail_link_suffix = '/from_bpod'
+    @content_class = 'best_photo_of_days'
 
-		@bpod = BestPhotoOfTheDay.all
+    check_loading_mode
+  end
 
-		ids = Array.new
+  def fresh
+    @page_title = 'Свежие фотографии'
 
-		@bpod.each do |best|
-			ids << best.photo_id
-		end
+    day = Date.today
+    interval = APP_CONFIG['fresh_interval']
+    @photos = Photo.where(created_at: ((day - interval).beginning_of_day..day.end_of_day))
+              .page(params[:page])
 
-		@photos = Photo.where(id: ids).page(params[:page])
+    @page = !params[:page].nil? ? params[:page] : 1
+    @per_page = Photo.per_page
+    @total = @photos.count
 
-		@page = params[:page] != nil ? params[:page] : 1
-		@per_page = Photo.per_page
-		@total = @photos.count
+    photo_of_the_day = BestPhotoOfTheDay.last
+    @best_photo_of_day = photo_of_the_day.photo
+    @best_photo_of_day_number = photo_of_the_day.number
+    @best_photo_bg_color = hex_to_rgba @best_photo_of_day.base_color, 0.4
 
-		@detail_link_suffix = '/from_bpod'
-		@content_class = 'best_photo_of_days'
+    @last_bp_number = @best_photo_of_day_number
 
-		check_loading_mode
+    if params[:page].to_i > 1
+      cur_page_first_photo_day = @photos.first.created_at.to_date
+      photo_of_current_page = BestPhotoOfTheDay.where('day >= ?', cur_page_first_photo_day)
+                              .first
 
-	end
+      @photo_of_current_page = photo_of_current_page.photo
+      @photo_of_current_page_number = photo_of_current_page.number
+      @photo_of_current_page_bg_color = hex_to_rgba @photo_of_current_page.base_color, 0.4
+      @render_another_photo_of_day = true if params[:mode] == 'partial'
+      @last_bp_number = @photo_of_current_page_number
+    end
 
-	def fresh
+    @detail_link_suffix = '/from_fresh'
+    check_loading_mode
+  end
 
-		@page_title = 'Свежие фотографии';
+  private
 
-		day = Date.today
-		interval = APP_CONFIG['fresh_interval']
-		@photos = Photo.where(:created_at => ((day-interval).beginning_of_day .. day.end_of_day)).page(params[:page])
-
-		@page = params[:page] != nil ? params[:page] : 1
-		@per_page = Photo.per_page
-		@total = @photos.count
-
-		photo_of_the_day 		  = BestPhotoOfTheDay.last
-   		@best_photo_of_day 		  = photo_of_the_day.photo
-   		@best_photo_of_day_number = photo_of_the_day.number
-        @best_photo_bg_color      = hex_to_rgba @best_photo_of_day.base_color, 0.4
-
-        @last_bp_number = @best_photo_of_day_number
-
-        if params[:page].to_i > 1 then
-        	
-        	cur_page_first_photo_day = @photos.first.created_at.to_date
-        	photo_of_current_page = BestPhotoOfTheDay.where("day >= ?", cur_page_first_photo_day).first
-
-        	@photo_of_current_page = photo_of_current_page.photo
-        	@photo_of_current_page_number = photo_of_current_page.number
-	        @photo_of_current_page_bg_color = hex_to_rgba @photo_of_current_page.base_color, 0.4
-
-	        @render_another_photo_of_day = true if params[:mode] == 'partial'
-	        @last_bp_number = @photo_of_current_page_number
-	        
-        end
-
-        @detail_link_suffix = '/from_fresh'
-
-		check_loading_mode
-
-	end
-
-	private
-
-		def check_loading_mode 
-			@content_class = @content_class? @content_class : '';
-			render layout: "ajax_page_load" if params[:mode] == 'ajax_page_load'
-			render layout: "partial" if params[:mode] == 'partial'
-		end
-
+  def check_loading_mode
+    @content_class.nil? && @content_class = ''
+    render layout: 'ajax_page_load' if params[:mode] == 'ajax_page_load'
+    render layout: 'partial' if params[:mode] == 'partial'
+  end
 end
