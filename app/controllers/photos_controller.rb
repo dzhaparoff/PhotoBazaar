@@ -79,7 +79,7 @@ class PhotosController < ApplicationController
   def category
     @cat = Category.find_by_code(params[:cat_slug].to_s)
 
-    @best_photo_in_category  = Photo.best_photo_in_category(@cat.id)
+    @best_photo_in_category = Photo.best_photo_in_category(@cat.id)
     @best_photo_bg_color = hex_to_rgba @best_photo_in_category.base_color, 0.4
 
     @photos = Photo.where(category_id: @cat.id).page(params[:page])

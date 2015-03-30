@@ -1,0 +1,14 @@
+  <link rel="canonical" href="http://photobazaar.ru/photo/<%= @photo.id %>" />
+  <meta name="title" content='Фото "<%= @photo.name %>"' />
+  <meta name="description" content="<%= meta_description(@photo) %>" />
+  <link rel="image_src" href="<%=@photo.local_image_url%>" />
+  <meta property="og:title" content='Фото "<%= @photo.name %>"' />
+  <meta property="og:description" content="<%= meta_description @photo %>" />
+  <meta property="og:image" content="http://photobazaar.ru<%=@photo.local_image_url%>" />
+  <meta property="og:url" content="http://photobazaar.ru/photo/<%=@photo.id%>" />
+  <meta property="og:site_name" content="PhotoBazaar" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="PhotoBazaarRu">
+  <meta name="twitter:title" content="<%= @photo.name %>">
+  <meta name="twitter:image:src" content="http://photobazaar.ru<%=@photo.thumbnails.url(:compressed)%>">
+  <meta name="twitter:url" content="http://photobazaar.ru/photo/<%= @photo.id %>">
