@@ -1,14 +1,14 @@
 module MetaHelper
-  def meta_description photo
-    description = String.new     
-    
+  def meta_description(photo)
+    return '' if photo.nil?
+
+    description = ''
     user = photo.photographer
-    
     description += "Фотограф: #{user.fullname.titleize}"
-    description += " - " if ( user.city.size > 0 || user.country.size > 0 ) unless user.city.nil? && user.country.nil?
-    description += "#{user.city.titleize}" if ( user.city.size > 0 ) unless user.city.nil?
-    description += ", " if ( user.city.size > 0 && user.country.size > 0) unless user.city.nil? && user.country.nil?
-    description += "#{user.country.titleize}" if ( user.country.size > 0) unless user.city.nil? && user.country.nil?
+    description += ' - ' if (user.city.size > 0 || user.country.size > 0) unless user.city.nil? && user.country.nil?
+    description += "#{user.city.titleize}" if (user.city.size > 0) unless user.city.nil?
+    description += ", " if (user.city.size > 0 && user.country.size > 0) unless user.city.nil? && user.country.nil?
+    description += "#{user.country.titleize}" if (user.country.size > 0) unless user.city.nil? && user.country.nil?
 
     description += ".
 ";
@@ -22,6 +22,6 @@ module MetaHelper
     description += "
 ";
 
-    description += 'PhotoBazaar.ru - лучшие фотографии со всего мира каждый день'
+    description + 'PhotoBazaar.ru - лучшие фотографии со всего мира каждый день'
   end
 end

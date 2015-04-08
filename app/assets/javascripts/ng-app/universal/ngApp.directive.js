@@ -4,6 +4,8 @@
 	.module('phb')
 	.directive('ngApp', ngApp);
 
+	ngApp.$inject = ['$location', '$compile', '$timeout', 'PageLoader']
+
 	function ngApp($location, $compile, $timeout, PageLoader) {
 	return { 
 		restrict : 'A',

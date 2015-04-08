@@ -4,6 +4,7 @@
 	.module('phb')
 	.directive('mapLinkTag', mapLinkTag);
 
+  mapLinkTag.$inject = ['$compile']
 
 	function mapLinkTag($compile) {
 	
@@ -25,7 +26,6 @@
 					//document.getElementsByTagName('head')[0].appendChild(googleMapScript);
 
 				}
-
 			}
 		}
 

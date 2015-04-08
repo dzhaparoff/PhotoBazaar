@@ -1,0 +1,1 @@
+!function(){"use strict";function ngController(){return{restrict:"A",link:function($scope,$element){$element.bind("$destroy",function(){$scope.$destroy()})}}}angular.module("phb").directive("ngController",ngController)}();

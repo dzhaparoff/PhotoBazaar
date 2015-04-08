@@ -4,7 +4,7 @@
 	.module('phb')
 	.directive('photosPaginator', photosPaginator);
 
-
+	photosPaginator.$inject = ['$rootScope', 'ngProgress']
 
 	function photosPaginator($rootScope, ngProgress) {
 	return { 

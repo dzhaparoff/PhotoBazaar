@@ -1,0 +1,1 @@
+!function(){"use strict";function helpers(){return{colorBrightness:function(color){var rgb=color.split(","),o=Math.round((299*parseInt(rgb[0])+587*parseInt(rgb[1])+114*parseInt(rgb[2]))/1e3);return o>125?!0:!1}}}angular.module("phb").factory("helpers",helpers)}();

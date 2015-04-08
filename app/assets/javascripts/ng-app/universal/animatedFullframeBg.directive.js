@@ -5,7 +5,7 @@
 	.directive('animatedFullframeBg', animatedFullframeBg);
 
 	function animatedFullframeBg() {
-	return { 
+	return {
 		restrict : 'A',
 		link : function($scope, $element, $attr) {
 

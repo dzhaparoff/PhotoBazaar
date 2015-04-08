@@ -3,9 +3,11 @@
 	angular
 	.module('phb')
 	.directive('infinitePaginationPhotosList', infinitePaginationPhotosList);
-	
+
+	infinitePaginationPhotosList.$inject = ['$location', '$http', '$compile', '$timeout', '$cacheFactory', 'ngProgress']
+
 	function infinitePaginationPhotosList($location, $http, $compile, $timeout, $cacheFactory, ngProgress){
-	
+
 	return {
 
 		restrict : 'A',
@@ -36,22 +38,22 @@
 
 
 			function scrollListner($scope) {
-	 	
+
 			 	var scrollDelta = (document.body.scrollHeight - $(window).scrollTop()) - document.body.clientHeight;
 			 	if (scrollDelta < 300) show_page('next');
-		 		
+
 		 		//if ( $(window).scrollTop() == 0 ) show_page('prev');
 
 			}
 
 			function changePageOnScroll() {
-				
+
 				var winTop = $(window).scrollTop();
 
 				var top = $.grep($li, function(item) {
 					return $(item).position().top <= winTop;
 				});
-				
+
 				if(top.length > 0) {
 					var element = _.last(top);
 					var page = $(element).attr('data-page');
@@ -74,9 +76,9 @@
 				var last_page_number = _.max(pages)
 
 			    var pages_count = parseInt($scope.total/$scope.perPage) + 1;
-			   
+
 			    var navigate_Photos = false;
-			    
+
 			    path.query.mode = 'partial';
 
 				if( mode == 'next' && last_page_number < pages_count) {
@@ -108,16 +110,16 @@
 							var template = $(data);
 
 							reinit_chache_for_infinite_pagination(data);
-							
+
 							var imgLoad = imagesLoaded(template),
 								items_count = template.find('img').length,
 								cur_item = 0;
 
 							imgLoad.on( 'progress', function( instance, image ) {
-						
+
 								var progress = cur_item/items_count*100;
 					    			cur_item = cur_item + 1;
-								
+
 								$scope.$emit('loading_progress', progress);
 
 							});
@@ -149,7 +151,7 @@
 										$compile(another_photo_of_day_template)($scope);
 									$('.pusher').append(another_photo_of_day_template)
 								}
-								
+
 							 	///init_AnimOnScroll($scope.id, 0);
 
 							 	$compile(template)($scope);
@@ -165,7 +167,7 @@
 							 	$scope.$emit('loading_complete');
 
 							});
-						
+
 					})
 
 					$(document).off('scroll');
@@ -179,9 +181,9 @@
 			});
 
 			function checkAnimationLock(){
-				
+
 				var posY = window.scrollY;
-				
+
 				if( typeof $cacheFactory['scrollPositions_' + $location.absUrl()] !== "undefined" ) {
 
 					if( posY > $cacheFactory['scrollPositions_' + $location.absUrl()] ) {
@@ -190,14 +192,14 @@
 					}
 
 					return true;
-					
+
 				}
 
 				else return false;
 
 			}
 
-			
+
 			function reinit_chache_for_infinite_pagination(new_elements){
 
 				if( typeof $cacheFactory[$location.absUrl()] !== "undefined" ) {
@@ -224,7 +226,7 @@
 			}
 
 			function getDummyHeigh(number, height) {
-				
+
 				var pos_array = [],
 					last_elements,
 					delta,
@@ -239,7 +241,7 @@
 				$('[data-bp-number="' + el_number + '"]').each(function(index){
 						pos_array[index] = $(this).offset().top + $(this).height();
 				});
-				
+
 				last_elements = _.takeRight(_.sortBy(pos_array),3);
 				delta = _.max(last_elements) - _.min(last_elements);
 				return height*.6 - delta;

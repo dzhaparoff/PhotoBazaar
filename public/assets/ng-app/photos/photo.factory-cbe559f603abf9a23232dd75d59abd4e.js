@@ -1,0 +1,1 @@
+!function(){"use strict";function photo($http){return{getPhoto:function(id){return $http.get("/api/photo?id="+id)}}}angular.module("phb").factory("photo",photo),photo.$inject=["$http"]}();

@@ -4,14 +4,16 @@
 	.module('phb')
 	.directive('phbContent', phbContent);
 
+	phbContent.$inject = ['$location', '$cacheFactory', '$compile', '$timeout', 'PageLoader']
+
 	function phbContent($location, $cacheFactory, $compile, $timeout, PageLoader) {
-	return { 
+	return {
 		restrict : 'A',
-		controller : function($element){
-			if( typeof $cacheFactory[$location.absUrl()] === 'undefined' ){
-				$cacheFactory[$location.absUrl()] = $element.html();
-			}
-		},
+		controller : ['$element', function($element){
+					if( typeof $cacheFactory[$location.absUrl()] === 'undefined' ){
+						$cacheFactory[$location.absUrl()] = $element.html();
+					}
+		}],
 		link : function($scope, $element, $attr) {
 
 			var location = $location.url(),

@@ -4,6 +4,8 @@
 	.module('phb')
 	.directive('photoItemInList', photoItemInList);
 
+	photoItemInList.$inject = ['helpers']
+
 	function photoItemInList(helpers){
 	
 	return function($scope, $element, $attr){

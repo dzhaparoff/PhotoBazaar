@@ -137,6 +137,7 @@
 	.constant('svgIconConfigConstant', svgIconConfig)
 	.directive('svgIcon', svgIconElement)
 
+	svgIconElement.$inject = ['svgIconConfigConstant']
 
 	function svgIconElement(svgIconConfigConstant){
 		return {
@@ -149,9 +150,6 @@
 				new svgIcon( element.get(0), svgIconConfigConstant, { easing : mina[easing], speed: speed, size: {w: attr.width, h: attr.height}, viewbox : viewbox, evtoggle : 'mouseover' } );
 			}
 		}
-
-
 	}
-
 
 })();

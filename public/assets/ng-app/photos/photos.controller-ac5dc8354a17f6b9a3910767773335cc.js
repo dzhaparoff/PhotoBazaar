@@ -1,0 +1,1 @@
+!function(){"use strict";function photosController(){}angular.module("phb").controller("photosController",photosController),photosController.$inject=["$scope","$location","$http","$compile"]}();

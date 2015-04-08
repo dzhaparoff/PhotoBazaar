@@ -24,4 +24,4 @@
 //= require fancybox.js
 //= require snapsvg.min.js
 //= require plugins.js
-//= require ng-app/manifest.js
+//= require ng-app

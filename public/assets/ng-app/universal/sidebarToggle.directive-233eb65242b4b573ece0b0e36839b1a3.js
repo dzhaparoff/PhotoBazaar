@@ -1,0 +1,1 @@
+!function(){"use strict";function sidebarToggle(){return{restrict:"A",link:function($scope,$element){function sidebar_toggle(){$(".main_sidebar").sidebar("toggle")}var sidebar_toggle;$element.click(sidebar_toggle)}}}angular.module("phb").directive("sidebarToggle",sidebarToggle)}();

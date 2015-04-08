@@ -1,0 +1,1 @@
+!function(){"use strict";function leftSidebar(){return{restrict:"A",link:function(){$("a.item").click(function(){$("a.item").removeClass("active"),$(this).addClass("active")})}}}angular.module("phb").directive("leftSidebar",leftSidebar)}();

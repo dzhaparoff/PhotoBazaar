@@ -4,6 +4,8 @@
 	.module('phb')
 	.controller('photoDetailController', photoDetailController);
 
+	photoDetailController.$inject = ['$scope', '$location']
+
 	function photoDetailController($scope, $location){
 
 		var page_height = window.innerHeight,

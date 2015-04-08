@@ -4,6 +4,7 @@
 	.module('phb')
 	.directive('loadingStatus', loadingStatus);
 
+	loadingStatus.$inject = ['ngProgress']
 
 	function loadingStatus(ngProgress) {
 	return { 

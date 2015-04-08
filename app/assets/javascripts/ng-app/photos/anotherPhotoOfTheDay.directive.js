@@ -4,9 +4,8 @@
 	.module('phb')
 	.directive('anotherPhotoOfTheDay', anotherPhotoOfTheDay);
 
-
 	function anotherPhotoOfTheDay() {
-		return { 
+		return {
 			restrict : 'A',
 			scope : {
 				number : "@",
@@ -24,7 +23,7 @@
 
 				$element.append("<div class='background' style='background-image:url(" + $scope.photoUrl +")'></div>");
 				$element.append("<div class='cloak_bg' style='background-color: rgba("+ $scope.hoverColor +")'></div>");
-				
+
 				var background_element  = $element.find('.background');
 
 				set_new_layer_on_page();
@@ -37,7 +36,7 @@
 				    function setScroll() {
 						scrolling = true;
 					}
-				    
+
 					function animate_on_scroll(){
 
 						var requestAnimationFrame = window.requestAnimationFrame ||

@@ -1,0 +1,1 @@
+!function(){"use strict";function ngApp(){return{restrict:"A",link:function($scope,$element){"undefined"==typeof $scope.page&&($scope.page={},$scope.page.title=$element.find("title").html(),$scope.page.content_class=null)}}}angular.module("phb").directive("ngApp",ngApp),ngApp.$inject=["$location","$compile","$timeout","PageLoader"]}();

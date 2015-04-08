@@ -6,7 +6,7 @@
 
   locationProvider.$inject = ['$locationProvider']
 
-	function locationProvider($locationProvider) {	  
+	function locationProvider($locationProvider) {
 	  $locationProvider.html5Mode(true)
 	}
 

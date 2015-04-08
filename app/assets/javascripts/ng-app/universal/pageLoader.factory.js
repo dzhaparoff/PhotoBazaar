@@ -4,6 +4,8 @@
 	.module('phb')
 	.factory('PageLoader', PageLoader);
 
+	PageLoader.$inject = ['$http']
+
 	function PageLoader($http) {
 	return { 
 		getPageFullContent: function(path){

@@ -4,6 +4,7 @@
 	.module('phb')
 	.directive('createdAt', createdAt);
 
+	createdAt.$inject = ['$timeout', '$filter']
 
 	function createdAt($timeout, $filter) {
 	

@@ -7,7 +7,7 @@ gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 gem "cocaine"
@@ -41,14 +41,14 @@ gem 'annotate', '~> 2.6.5'
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 gem 'f00px'
 gem "flickr.rb"
-gem "paperclip"								#https://github.com/thoughtbot/paperclip/wiki/Thumbnail-Generation
+gem "paperclip"							#https://github.com/thoughtbot/paperclip/wiki/Thumbnail-Generation
 gem "miro" 									#работа с изображениями
 gem "color"
 gem "color_namer"
-gem 'hashie'  								#https://github.com/intridea/hashie
+gem 'hashie'  							#https://github.com/intridea/hashie
 
-gem 'gon'									#https://github.com/gazay/gon/wiki/Usage-with-jbuilder    to_js
-gem 'oj'									#https://github.com/ohler55/oj							  json parser
+gem 'gon'									  #https://github.com/gazay/gon/wiki/Usage-with-jbuilder    to_js
+gem 'oj'									  #https://github.com/ohler55/oj							  json parser
 
 gem 'foreman'								#https://github.com/ddollar/foreman
 
@@ -58,7 +58,7 @@ gem 'will_paginate'
 gem 'devise'								#https://github.com/plataformatec/devise#getting-started
 gem 'omniauth-facebook'						#
 gem 'omniauth-vkontakte'					#
-gem 'omniauth-500px'						#
+gem 'omniauth-500px'						  #
 
 #gem 'pg_search'
 

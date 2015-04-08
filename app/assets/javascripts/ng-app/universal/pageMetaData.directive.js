@@ -4,6 +4,8 @@
 	.module('phb')
 	.directive('pageMetaData', pageMetaData);
 
+	pageMetaData.$inject = ['$location']
+
 	function pageMetaData($location) {
 	return { 
 		restrict : 'AEL',

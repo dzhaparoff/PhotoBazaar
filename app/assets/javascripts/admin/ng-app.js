@@ -8,43 +8,43 @@
 
 	/*factories*/	
 
-	mpxAdmin.factory("Api", function($resource){ 	
-		    return { 
-		    		Categories: $resource('/admin/api/categories/:id', {id: '@id'},
-		    			{
-		    				update : {
-		    					method : "PUT"
-		    				}
-		    			}
-		    			),
-		    		Photos: 	$resource('/admin/api/photos/:id', {id: '@id'},
-		    			{
-		    				update : {
-		    					method : "PUT"
-		    				}
-		    			}),
-		    		Photographers: 	$resource('/admin/api/photographers/:id', {id: '@id'},
-		    			{
-		    				update : {
-		    					method : "PUT"
-		    				}
-		    			}),
-		    		Cameras: 	$resource('/admin/api/cameras/:id', {id: '@id'},
-		    			{
-		    				update : {
-		    					method : "PUT"
-		    				}
-		    			})
-		    	}
-	})
+	mpxAdmin.factory("Api", ["$resource",function($resource){ 	
+			    return { 
+			    		Categories: $resource('/admin/api/categories/:id', {id: '@id'},
+			    			{
+			    				update : {
+			    					method : "PUT"
+			    				}
+			    			}
+			    			),
+			    		Photos: 	$resource('/admin/api/photos/:id', {id: '@id'},
+			    			{
+			    				update : {
+			    					method : "PUT"
+			    				}
+			    			}),
+			    		Photographers: 	$resource('/admin/api/photographers/:id', {id: '@id'},
+			    			{
+			    				update : {
+			    					method : "PUT"
+			    				}
+			    			}),
+			    		Cameras: 	$resource('/admin/api/cameras/:id', {id: '@id'},
+			    			{
+			    				update : {
+			    					method : "PUT"
+			    				}
+			    			})
+			    	}
+		}])
 
-	mpxAdmin.factory("CurrentCollections", function($http){
+	mpxAdmin.factory("CurrentCollections", ["$http",function($http){
 		return {
 			getPhotos: function() {
 	            return $http.get('/admin/api/get_photos');
         	}
 		}
-	})
+	}])
 
 	mpxAdmin.factory("Search",function(){
 		return {
@@ -58,63 +58,63 @@
 
 	/*directives*/
 
-	mpxAdmin.directive('photo', function ($http) {       
-    return {
-    	restrict: 'E',
-
-        link: function(scope, element, attrs) {   
-            	
-        	element.find('.dimmer')
-			  .dimmer({
-			    on: 'hover'
-			  })
-			;
-
-			element.find('.fbox').click(function(event){
-				event.preventDefault();
-				$.fancybox.showLoading();
-
-				$http.post('/admin/api/get_photo', {id : attrs.photoId, image_size: 2048 })
-					 .then(function(responce){
-					  	console.log(responce.data.photo.image_url)
-					 	$.fancybox.open({
-							href: responce.data.photo.image_url,
-							type: "image",
-							padding:0,
-						 	helpers: {
-			           			overlay: {
-			           				locked: false
-			           			}
-			         		},
-							afterOpen:function(){
-								$.fancybox.hideLoading();
-							}
-						})
-
-					 });
-				
-			});	
-
-        }
-    }
-	});
+	mpxAdmin.directive('photo', ['$http',function ($http) {
+	    return {
+	    	restrict: 'E',
+	
+	        link: function(scope, element, attrs) {   
+	            	
+	        	element.find('.dimmer')
+				  .dimmer({
+				    on: 'hover'
+				  })
+				;
+	
+				element.find('.fbox').click(function(event){
+					event.preventDefault();
+					$.fancybox.showLoading();
+	
+					$http.post('/admin/api/get_photo', {id : attrs.photoId, image_size: 2048 })
+						 .then(function(responce){
+						  	console.log(responce.data.photo.image_url)
+						 	$.fancybox.open({
+								href: responce.data.photo.image_url,
+								type: "image",
+								padding:0,
+							 	helpers: {
+				           			overlay: {
+				           				locked: false
+				           			}
+				         		},
+								afterOpen:function(){
+									$.fancybox.hideLoading();
+								}
+							})
+	
+						 });
+					
+				});	
+	
+	        }
+	    }
+		}]);
 
 	/*end*directives*/
 
 
 	/*controllers*/
-	mpxAdmin.controller('MainController', function (Api, $scope) {
-
-		$scope.categories = Api.Categories.query();
+	mpxAdmin.controller('MainController', ['Api','$scope',function (Api, $scope) {
 	
-		$scope.$watchCollection(
-			"categories",
-				function( newValue, oldValue ) {
-					if(newValue.length > 0) $('.CategoryModel').dimmer('hide');
-				}
-		);
-
-	});
+			$scope.categories = Api.Categories.query();
+		
+			$scope.$watchCollection(
+				"categories",
+					function( newValue, oldValue ) {
+						if(newValue.length > 0) $('.CategoryModel').dimmer('hide');
+					}
+			);
+	
+		}]);
 
 	mpxAdmin.controller('Dashboard', function(Api, Search, $scope){
 		

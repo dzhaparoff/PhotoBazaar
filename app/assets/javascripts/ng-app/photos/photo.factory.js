@@ -4,6 +4,8 @@
 	.module('phb')
 	.factory('photo', photo);
 
+	photo.$inject = ['$http']
+
 	function photo($http) {
 	
 		return { 
