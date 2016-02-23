@@ -18,6 +18,10 @@
 	bottom:3.5rem;
 	width:100%;
 	left:0px;
+
+   @media only screen and (max-width: 639px){
+     display:none;
+    }
 }
 
 .siteHeader-inner .item {
@@ -71,27 +75,53 @@
 	text-transform: uppercase;
 }
 
-.siteHeader .logobox {
-	position: absolute;
-	top:30%;
-	left:0px;
-	width: 100%;
-	text-align: center;
-	z-index: 3;
-	font-family: "helveticaneuecyrlight";
-	font-size: 1.2em;
+.siteHeader {
+  .logobox {
+    position: absolute;
+    top:30%;
+    left:0px;
+    width: 100%;
+    text-align: center;
+    z-index: 3;
+    font-family: "helveticaneuecyrlight";
+    font-size: 1.2em;
+    .title {
+      font-size: 60px;
+      margin:10px 0 5px;
+       span {
+          font-size: 20px;
+          position: relative;
+          top:-20px;
+          left:5px;
+      }
+    }
+    @media only screen and (max-width: 639px){
+      top: 20%;
+      font-size: 14px;
+      .title {
+        font-size: 35px;
+        span {
+          font-size: 16px;
+        }
+      }
+
+      .description {
+        width: 60%;
+        margin: 0 auto;
+        position: relative;
+        .ui.divider {
+          margin: .2em 0;
+        }
+        .svg-wrapper {
+          position:relative;
+          transform:translate3d(-50%,0,0);
+          left: 50%;
+        }
+      }
+    }
+  }
 }
 
-.siteHeader .logobox .title {
-	font-size: 60px;
-	margin:10px 0 5px;
-}
-.siteHeader .logobox .title span {
-	font-size: 20px;
-	position: relative;
-	top:-20px;
-	left:5px;
-}
 .siteHeader .bg_image {
 	display: block;
 	position: absolute;
@@ -115,7 +145,7 @@
 
 .svg-wrapper {
   margin: 0 auto;
-  width: 320px;  
+  width: 320px;
   display: block;
 }
 

@@ -1,0 +1,193 @@
+/* line 3, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .vertical.segment {
+  padding: 12rem 0rem;
+}
+
+/* line 6, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .fixed.launch.button {
+  position: fixed;
+  top: 20px;
+  left: -1px;
+  z-index: 50;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-transition: 0.3s width ease, 0.5s -webkit-transform ease;
+          transition: 0.3s width ease, 0.5s transform ease;
+  background-color: #101010;
+  opacity: 1;
+  width: 60px;
+  height: auto;
+}
+
+/* line 21, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .fixed.launch.button:hover {
+  opacity: 1;
+}
+
+/* line 24, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .ui.inverted.menu {
+  background-color: #101010;
+}
+
+/* line 27, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .top.fixed {
+  height: 30px;
+}
+
+/* line 30, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .item.no_pre:before {
+  display: none;
+}
+
+/* line 33, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .menu .logo {
+  width: 50px;
+  height: 50px;
+  margin: 20px auto;
+}
+
+/* line 38, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .item.logo_placeholder:hover {
+  background: #101010;
+}
+
+/* line 41, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .menu .logo path {
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-miterlimit: 10;
+  -webkit-transition: 0.5s stroke ease;
+          transition: 0.5s stroke ease;
+}
+
+/* line 49, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .menu .item:hover .logo path {
+  stroke: #fa515e;
+}
+
+/* line 53, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .menu .hidden.divider {
+  margin: 0px;
+  height: 20px;
+  background: #151515;
+}
+
+/* line 59, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .menu .item.current {
+  background-color: #f7f7f7;
+  color: #101010;
+}
+
+/* line 63, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .menu .item.current .icon {
+  color: #101010;
+}
+
+/* line 67, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .ui.selection.dropdown {
+  min-width: 100% !important;
+}
+
+/* line 70, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+.centeraligned.image {
+  display: block;
+  margin: 0px auto;
+  height: 50px;
+  font-size: 50px;
+  color: #000;
+  border: 0px;
+}
+
+/* line 78, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+.hidden_input {
+  display: none;
+}
+
+/* line 82, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#CategoryTable td {
+  position: relative;
+}
+
+/* line 86, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#CategoryTable td .contenteditable {
+  margin: -0.7em -0.8em;
+  padding: 0.7em 0.8em;
+}
+
+/* line 90, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#CategoryTable td .contenteditable:focus {
+  background: #fff;
+  outline: none;
+  position: relative;
+  z-index: 999;
+}
+
+/* line 96, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#CategoryTable td .contenteditable.large:focus {
+  position: absolute;
+  width: 120%;
+  min-height: 180%;
+  height: auto;
+  top: -20%;
+  left: -10%;
+  z-index: 999;
+  background: #fff;
+  box-shadow: 0px 0px 10px rgba(20, 20, 20, 0.65);
+  outline: none;
+  color: #101010;
+}
+
+/* line 110, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .found_image {
+  text-align: center;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+/* line 116, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .colors {
+  height: 10px;
+}
+
+/* line 120, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .colors .row {
+  padding: 0px;
+}
+
+/* line 124, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin .colors .color {
+  height: 10px;
+}
+
+/* line 128, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin photo {
+  position: relative;
+}
+
+/* line 132, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+#admin photo.exist:after {
+  content: " ";
+  background: #fff;
+  position: absolute;
+  display: block;
+  top: -2%;
+  left: -2%;
+  width: 104%;
+  height: 104%;
+  opacity: 0.9;
+  z-index: 1;
+  visibility: visible;
+}
+
+/* line 146, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+.statistics.dashboard {
+  width: 100%;
+}
+
+/* line 150, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/admin/admin.css.scss */
+.statistics.dashboard .statistic {
+  width: 25%;
+  max-width: 25%;
+}

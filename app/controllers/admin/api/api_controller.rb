@@ -19,7 +19,13 @@ class Admin::Api::ApiController < Admin::AdminController
 
   def get_photo
     response = F00px.get('photos/' + params[:id], params)
-    @response_hash = JSON.parse(response.body)
+    response_hash = JSON.parse(response.body)
+    doc_href = 'https://500px.com' + response_hash['photo']['url']
+    doc = Nokogiri::HTML(open(doc_href))
+    img_url = doc.css('meta[property="og:image"]').first
+    response_hash['photo']['image_url'] = img_url['content']
+
+    @response_hash = response_hash
     render json: @response_hash
   end
 

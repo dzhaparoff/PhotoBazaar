@@ -1,0 +1,20 @@
+@media only screen and (max-width: 639px) {
+  /* line 6, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/photos.css.scss */
+  .ui.vertical.main.basic.segment {
+    position: relative;
+    top: 200px;
+  }
+}
+
+@media only screen and (max-width: 639px) {
+  /* line 14, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/photos.css.scss */
+  .photo_detail .sharebox {
+    text-align: center;
+    padding-top: 15px;
+  }
+
+  /* line 19, /home/ubuntu/rp/mixedPx/app/assets/stylesheets/photos.css.scss */
+  .help.column .list {
+    display: none;
+  }
+}

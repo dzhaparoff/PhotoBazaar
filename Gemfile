@@ -62,8 +62,11 @@ gem 'omniauth-500px'						  #
 
 #gem 'pg_search'
 
+gem 'nokogiri'
+
 gem 'newrelic_rpm'
 gem "dynamic_sitemaps"
+gem 'memcached_store'
 
 group :development do
   gem "awesome_print"

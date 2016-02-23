@@ -8,11 +8,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="eight wide column">           
+          <div class="eight wide column">
             <div class="ui form" ng-controller="PhotosFhFormController">
             <iframe src="/images/icons/500px.svg" height="50" alt="" class="ui image centeraligned"></iframe>
-            <div class="ui section divider hidden"></div>   
-            <p>Поиск фотографии по фразе осуществляется API функцией <a href="https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos_search.md">"photos/search"</a></p>             
+            <div class="ui section divider hidden"></div>
+            <p>Поиск фотографии по фразе осуществляется API функцией <a href="https://github.com/500px/api-documentation/blob/master/endpoints/photo/GET_photos_search.md">"photos/search"</a></p>
               <%= form_tag do %>
                 <div class="two fields">
                   <div class="field">
@@ -42,7 +42,7 @@
                     <select
                       id="formDataSort"
                       ng-model="formData.sort"
-                      ng-init="formData.sort = 'rating'"  
+                      ng-init="formData.sort = 'rating'"
                       ng-options="sort.value as sort.name for sort in formSort">
                     </select>
                   </div>
@@ -51,12 +51,12 @@
                     <select
                       id="formDataRpp"
                       ng-model="formData.rpp"
-                      ng-init="formData.rpp = 5"  
+                      ng-init="formData.rpp = 5"
                       ng-options="rpp.value as rpp.name for rpp in formRpp">
                     </select>
                   </div>
                 </div>
-                <div class="ui section divider header horizontal">все готово?</div>   
+                <div class="ui section divider header horizontal">все готово?</div>
                 <button type="button" ng-click='processForm($event)' class="ui submit button animated fluid basic blue" ng-class="loading">
                     <div class="visible content">Загрузить</div>
                     <div class="hidden content"><i class="right arrow icon"></i></div>
@@ -67,17 +67,17 @@
           <div class="eight wide column">
               <div class="ui form">
                   <i class="flickr icon ui image centeraligned"></i>
-                  <div class="ui section divider hidden"></div>   
+                  <div class="ui section divider hidden"></div>
                   <p>Поиск фотографии по фразе осуществляется API функцией <a href="#">"photos_search"</a></p>
               </div>
-          </div>         
+          </div>
         </div>
 
         <div class="ui section divider hidden horizontal"></div>
         <!-- Найденые фотографии -->
         <div class="row" bindonce ng-controller="PhotosSearchResult" ng-show="photosFound">
               <div class="ui five cards">
-               <photo class="card found_photo" id="Photo_{{photo.id}}" ng-repeat="photo in fh_photos" ng-class="{'exist' : photoExist[photo.id]}" photo-id="{{photo.id}}">                   
+               <photo class="card found_photo" id="Photo_{{photo.id}}" ng-repeat="photo in fh_photos" ng-class="{'exist' : photoExist[photo.id]}" photo-id="{{photo.id}}">
                   <div class="image dimmable">
                       <div class="ui dimmer">
                         <div class="content">
@@ -86,7 +86,7 @@
                           </div>
                         </div>
                       </div>
-                      <img bo-src="photo.image_url" alt="" width="100%">            
+                      <img bo-src="photo.image_url" alt="" width="100%">
                    </div>
                    <div class="ui bottom attached button" ng-click="addPhoto(photo)">
                     <i class="add icon"></i>
@@ -94,8 +94,8 @@
                   </div>
               </photo>
               </div>
-        </div>        
+        </div>
         <!--end Найденые фотографии -->
-        
+
       </div>
     </div>

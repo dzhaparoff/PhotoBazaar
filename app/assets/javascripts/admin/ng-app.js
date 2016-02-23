@@ -76,7 +76,7 @@
 	
 					$http.post('/admin/api/get_photo', {id : attrs.photoId, image_size: 2048 })
 						 .then(function(responce){
-						  	console.log(responce.data.photo.image_url)
+						  	console.log(responce)
 						 	$.fancybox.open({
 								href: responce.data.photo.image_url,
 								type: "image",
